@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Senior Graphic Designer — Onboarding Plan | Calyx Containers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #0033A1;
+      --blue-light: #DBE6FF;
+      --blue-dark: #001F60;
+      --text-primary: #1a1a1a;
+      --text-secondary: #555;
+      --text-tertiary: #888;
+      --border: #e8e8e8;
+      --border-light: #f0f0f0;
+      --bg: #ffffff;
+      --bg-soft: #f8f8f6;
+      --bg-subtle: #f3f3f1;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --font-serif: 'DM Serif Display', Georgia, serif;
+      --font-sans: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--text-primary);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      height: 52px;
+    }
+
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      color: var(--text-primary);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0;
+      list-style: none;
+      margin-left: auto;
+    }
+
+    .nav-links a {
+      font-size: 12.5px;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); background: var(--bg-soft); }
+
+    .nav-back {
+      font-size: 12.5px;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.15s;
+    }
+
+    .nav-back:hover { color: var(--text-primary); }
+
+    /* ── LAYOUT ── */
+    .page-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    /* ── HEADER ── */
+    .page-header {
+      padding-bottom: 2rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .page-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .page-title {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    .page-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .page-meta span + span::before { content: '·'; margin: 0 10px; }
+
+    /* ── SECTION LABELS ── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 1.25rem;
+      margin-top: 2.5rem;
+    }
+
+    .divider {
+      border: none;
+      border-top: 0.5px solid var(--border-light);
+      margin: 2.5rem 0;
+    }
+
+    /* ── OVERVIEW ── */
+    .overview-card {
+      background: var(--bg-soft);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .overview-card p {
+      font-size: 14.5px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    .overview-card p + p { margin-top: 0.875rem; }
+
+    /* ── OUTCOMES ── */
+    .outcomes-intro {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 0;
+    }
+
+    .outcome-item {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.125rem;
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      transition: border-color 0.15s;
+    }
+
+    .outcome-item:hover { border-color: var(--blue); }
+
+    .outcome-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--blue);
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    /* ── PHASES ── */
+    .phase-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 1.25rem;
+    }
+
+    .phase-tab {
+      flex: 1;
+      padding: 11px 10px;
+      border-radius: var(--radius-md);
+      border: 0.5px solid var(--border);
+      background: var(--bg);
+      cursor: pointer;
+      text-align: center;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      transition: all 0.15s;
+      line-height: 1.4;
+    }
+
+    .phase-tab:hover { background: var(--bg-soft); border-color: #ccc; }
+
+    .phase-tab.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .phase-tab .tab-days { font-size: 13px; font-weight: 500; display: block; }
+    .phase-tab .tab-label { font-size: 11px; opacity: 0.75; display: block; margin-top: 1px; }
+    .phase-tab.active .tab-label { opacity: 0.85; }
+
+    .phase-panel { display: none; }
+    .phase-panel.active { display: block; }
+
+    .phase-theme {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 15.5px;
+      color: var(--text-secondary);
+      margin-bottom: 1.25rem;
+      padding-left: 1.125rem;
+      border-left: 2.5px solid var(--blue);
+      line-height: 1.5;
+    }
+
+    .workstream-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 1.25rem;
+    }
+
+    .workstream-card {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.125rem;
+      transition: border-color 0.15s;
+    }
+
+    .workstream-card:hover { border-color: #bbb; }
+
+    .ws-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 5px;
+    }
+
+    .ws-body {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .milestone-box {
+      background: var(--bg-soft);
+      border-radius: var(--radius-md);
+      padding: 1.125rem 1.375rem;
+      margin-top: 0;
+    }
+
+    .milestone-box .section-label { margin-bottom: 0.625rem; }
+
+    .milestone-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .milestone-list li {
+      font-size: 13px;
+      color: var(--text-secondary);
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      line-height: 1.5;
+    }
+
+    .milestone-list li::before {
+      content: '';
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      border: 1.5px solid #ccc;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── PEOPLE ── */
+    .people-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 9px;
+      margin-bottom: 0;
+    }
+
+    .person-card {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 0.875rem 1rem;
+      display: flex;
+      gap: 11px;
+      align-items: flex-start;
+      transition: border-color 0.15s;
+    }
+
+    .person-card:hover { border-color: #bbb; }
+
+    .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--blue-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--blue-dark);
+      flex-shrink: 0;
+    }
+
+    .person-info { flex: 1; min-width: 0; }
+    .person-name { font-size: 13px; font-weight: 500; }
+    .person-role { font-size: 11.5px; color: var(--text-secondary); margin-top: 1px; }
+    .person-need { font-size: 11.5px; color: var(--text-tertiary); margin-top: 3px; line-height: 1.45; }
+
+    /* ── SCORECARD ── */
+    .sc-intro {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      margin-bottom: 1.25rem;
+      line-height: 1.65;
+    }
+
+    .sc-progress-wrap {
+      background: var(--bg-soft);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.375rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .sc-progress-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .sc-progress-label { font-size: 13px; font-weight: 500; }
+    .sc-progress-count { font-size: 12px; color: var(--text-tertiary); margin-left: auto; }
+
+    .sc-progress-track {
+      height: 5px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .sc-progress-fill {
+      height: 100%;
+      background: var(--blue);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
+    .sc-table {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .sc-thead {
+      display: grid;
+      grid-template-columns: 160px repeat(3, 1fr);
+      background: var(--bg-soft);
+      border-bottom: 0.5px solid var(--border);
+      padding: 0;
+    }
+
+    .sc-thead .sc-col-measure,
+    .sc-thead .sc-col-day {
+      padding: 10px 14px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+
+    .sc-thead .sc-col-day {
+      border-left: 0.5px solid var(--border);
+      color: var(--blue-dark);
+    }
+
+    .sc-group-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      background: var(--bg-soft);
+      padding: 7px 14px;
+      border-top: 0.5px solid var(--border);
+    }
+
+    .sc-row-item {
+      display: grid;
+      grid-template-columns: 160px repeat(3, 1fr);
+      border-top: 0.5px solid var(--border-light);
+    }
+
+    .sc-row-item:hover { background: var(--bg-soft); }
+
+    .sc-col-measure {
+      padding: 14px;
+      display: flex;
+      align-items: center;
+    }
+
+    .sc-measure-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.4;
+    }
+
+    .sc-col-day {
+      padding: 12px 14px;
+      border-left: 0.5px solid var(--border-light);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .sc-check {
+      display: flex;
+      align-items: flex-start;
+      cursor: pointer;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .sc-check input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .sc-checkmark {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 1.5px solid var(--border);
+      background: var(--bg);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.12s;
+    }
+
+    .sc-check input:checked + .sc-checkmark {
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+
+    .sc-check input:checked + .sc-checkmark::after {
+      content: '';
+      width: 9px;
+      height: 5px;
+      border-left: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      transform: rotate(-45deg) translateY(-1px);
+      display: block;
+    }
+
+    .sc-check:hover .sc-checkmark { border-color: var(--blue); }
+
+    .sc-day-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ── RISKS ── */
+    .risks-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .risk-card {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.125rem;
+      transition: border-color 0.15s;
+    }
+
+    .risk-card:hover { border-color: #bbb; }
+
+    .risk-tag {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 2px 9px;
+      border-radius: 12px;
+      margin-bottom: 7px;
+      display: inline-block;
+    }
+
+    .risk-tag.designer { background: var(--blue-light); color: var(--blue-dark); }
+    .risk-tag.manager { background: #EEF2FF; color: #3730A3; }
+
+    .nav-home-btn {
+      font-size: 12.5px;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      border: 0.5px solid var(--border);
+      transition: all 0.15s;
+      white-space: nowrap;
+      margin-left: 0.5rem;
+    }
+
+    .nav-home-btn:hover {
+      color: var(--blue);
+      border-color: var(--blue);
+      background: var(--blue-light);
+    }
+
+    .risk-title { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+    .risk-body { font-size: 12.5px; color: var(--text-secondary); line-height: 1.55; }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 0.5px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: var(--font-serif);
+      font-size: 14px;
+      color: var(--text-tertiary);
+    }
+
+    .footer-note {
+      font-size: 11.5px;
+      color: var(--text-tertiary);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .page-wrap { padding: 2rem 1.25rem 4rem; }
+      .outcomes-grid, .workstream-grid, .people-grid, .risks-grid { grid-template-columns: 1fr; }
+      .phase-tabs { flex-direction: column; }
+      .page-title { font-size: 26px; }
+      .site-nav { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+      .sc-thead, .sc-row-item { grid-template-columns: 120px repeat(3, 1fr); }
+      .sc-col-day { padding: 10px 8px; }
+      .sc-day-desc { font-size: 11px; }
+      .sc-measure-name { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav">
+    <a class="nav-logo" href="index.html">Calyx Onboarding</a>
+    <ul class="nav-links">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#outcomes">Outcomes</a></li>
+      <li><a href="#plan">30/60/90</a></li>
+      <li><a href="#people">People</a></li>
+      <li><a href="#scorecard">Scorecard</a></li>
+    </ul>
+    <a class="nav-home-btn" href="index.html">&#8592; Home</a>
+  </nav>
+
+  <div class="page-wrap">
+
+    <!-- HEADER -->
+    <header class="page-header">
+      <div class="page-eyebrow">Onboarding Plan</div>
+      <h1 class="page-title">Senior Graphic Designer</h1>
+      <div class="page-meta">
+        <span>Calyx Containers</span>
+        <span>Reports to Alex Joyce</span>
+        <span>Days 1–90</span>
+        <span>Confidential</span>
+      </div>
+    </header>
+
+    <!-- OVERVIEW -->
+    <div id="overview">
+      <div class="section-label">Overview</div>
+      <div class="overview-card">
+        <p>The Senior Graphic Designer joins Calyx Containers at a moment when visual execution has never mattered more. The brand is in the early stages of a rebrand, tradeshow creative demands are high, and the sales team needs a complete enablement kit that doesn't yet exist. The design function has room to grow — and the person stepping into it will have an immediate, visible impact.</p>
+        <p>This plan is built so the Senior Graphic Designer becomes the creative engine of the marketing team before reaching for brand strategy input. The path moves through three deliberate phases: orient and absorb in the first 30 days, contribute real creative work in days 31–60, and take full ownership of design production by day 90.</p>
+        <p>The role requires close collaboration from day one — with Alex Joyce on brief and direction, with Amie Hadley on production and prepress, with Greg Furner on plant constraints, and with the sales team on what enablement assets actually need to say. None of this work is done in isolation.</p>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- OUTCOMES -->
+    <div id="outcomes">
+      <div class="section-label">High level outcomes</div>
+      <p class="outcomes-intro">By day 90, the Senior Graphic Designer should be a fully embedded creative contributor — not still orienting. The outcomes below define what success looks like at the close of this plan.</p>
+      <div class="outcomes-grid">
+        <div class="outcome-item"><div class="outcome-dot"></div>Independently owns sales enablement design, tradeshow creative, social templates, ABM visuals, and the design asset library</div>
+        <div class="outcome-item"><div class="outcome-dot"></div>Brand system fluent — applying Calyx visual identity accurately across all asset types without routine sign-off</div>
+        <div class="outcome-item"><div class="outcome-dot"></div>Led creative production for at least one tradeshow end-to-end, from brief to on-site execution</div>
+        <div class="outcome-item"><div class="outcome-dot"></div>Built and shared a design AI workflow reference (Firefly, Midjourney, ChatGPT) used as a team resource</div>
+        <div class="outcome-item"><div class="outcome-dot"></div>Contributed visible creative work to at least four of five live Q2 marketing OKRs without owning delivery of any</div>
+        <div class="outcome-item"><div class="outcome-dot"></div>Baseline Sales Enablement Kit scoped, planned, and Phase 1 in flight as the role's Initial Project</div>
+        <div class="outcome-item"><div class="outcome-dot"></div>Delivered a written 90-day observation memo covering brand gaps, process improvements, and design ops recommendations</div>
+        <div class="outcome-item"><div class="outcome-dot"></div>Three concrete design process improvement proposals submitted; design asset library v1 organized and documented</div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- 30/60/90 PLAN -->
+    <div id="plan">
+      <h2 class="section-title">The 30 / 60 / 90 plan</h2>
+      <div class="section-label">Phases</div>
+
+      <div class="phase-tabs" role="tablist">
+        <button class="phase-tab active" role="tab" onclick="switchPhase(0)">
+          <span class="tab-days">Days 1–30</span>
+          <span class="tab-label">Foundation</span>
+        </button>
+        <button class="phase-tab" role="tab" onclick="switchPhase(1)">
+          <span class="tab-days">Days 31–60</span>
+          <span class="tab-label">Earn trust</span>
+        </button>
+        <button class="phase-tab" role="tab" onclick="switchPhase(2)">
+          <span class="tab-days">Days 61–90</span>
+          <span class="tab-label">Take ownership</span>
+        </button>
+      </div>
+
+      <!-- PHASE 1 -->
+      <div class="phase-panel active" id="phase-0">
+        <p class="phase-theme">"The most observant designer in every room."</p>
+        <div class="workstream-grid">
+          <div class="workstream-card">
+            <div class="ws-title">Access &amp; admin</div>
+            <div class="ws-body">Complete all HR onboarding. Confirm and test access to the full design and marketing stack — Adobe CC, Figma, Google Drive, Gmail, Slack, HubSpot, Gong, Shopify, Claude/ChatGPT/Gemini. Flag any gaps to Mirhaan Rajani by end of Week 1.</div>
+          </div>
+          <div class="workstream-card">
+            <div class="ws-title">Brand immersion</div>
+            <div class="ws-body">Deep-dive into Calyx brand guidelines — visual identity, typography, color system, tone of voice. Review all active asset types: sales decks, tradeshow materials, social templates, and print collateral. Understand the design system top to bottom before producing anything.</div>
+          </div>
+          <div class="workstream-card">
+            <div class="ws-title">Relationships</div>
+            <div class="ws-body">1:1s with Alex Joyce, Peter Andersson (VP Product), Simon Knobel (CEO), and Alex Gonzalez. Introductions to all four agency partners: Beard Bros, Grasslands, Creative Bend, CRC. All cross-functional intros complete by Day 30.</div>
+          </div>
+          <div class="workstream-card">
+            <div class="ws-title">Production process</div>
+            <div class="ws-body">Half-day with Amie Hadley on the end-to-end production ticket workflow — brief submission, prepress review, print specs, fulfillment, and shipping. Plant walk with Greg Furner to understand capacity and collateral lead times. AI training session with Xander on platforms, use cases, and design-specific tools.</div>
+          </div>
+        </div>
+        <div class="milestone-box">
+          <div class="section-label">30-day checkpoint</div>
+          <ul class="milestone-list">
+            <li>All agency partner relationships established with warm intros from Alex Joyce</li>
+            <li>Full design and marketing stack access tested and functional</li>
+            <li>Brand guidelines reviewed; first asset produced and approved</li>
+            <li>Production workflow understood — ticket to fulfillment — with Amie Hadley sign-off</li>
+            <li>Written agreement with Alex Joyce on what creative transfers on Day 31</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- PHASE 2 -->
+      <div class="phase-panel" id="phase-1">
+        <p class="phase-theme">"Real creative work begins. Quality before speed."</p>
+        <div class="workstream-grid">
+          <div class="workstream-card">
+            <div class="ws-title">Sales enablement</div>
+            <div class="ws-body">Co-produce sales assets with Alex Joyce. Begin contributing to the master deck, product one-sheeters, and account-specific materials. Strategy and messaging direction stay with Alex Joyce through Day 60.</div>
+          </div>
+          <div class="workstream-card">
+            <div class="ws-title">Tradeshow creative</div>
+            <div class="ws-body">Co-lead creative production for the next show — booth graphics, signage, printed collateral, and digital assets. Coordinate with Amie Hadley on print specs and lead times. Write a post-show retro on what worked and what didn't.</div>
+          </div>
+          <div class="workstream-card">
+            <div class="ws-title">Social templates</div>
+            <div class="ws-body">Build or refine the visual template library for social channels. Ensure all templates are brand-accurate, editable, and documented in the design asset library.</div>
+          </div>
+          <div class="workstream-card">
+            <div class="ws-title">ABM visuals</div>
+            <div class="ws-body">Produce account-specific visual assets for target accounts in the HubSpot ABM board. Coordinate with the Marketing Coordinator on which accounts are active and what assets are needed.</div>
+          </div>
+          <div class="workstream-card">
+            <div class="ws-title">Design asset library</div>
+            <div class="ws-body">Begin the audit and reorganization of the Google Drive design folders. Document naming conventions, folder structure, and version standards. Announce changes before restructuring shared folders.</div>
+          </div>
+          <div class="workstream-card">
+            <div class="ws-title">AI integration</div>
+            <div class="ws-body">Explore design-specific AI tools (Firefly, Midjourney, ChatGPT). Document three concrete AI workflows. Build the design AI one-sheeter v1 for team reference.</div>
+          </div>
+        </div>
+        <div class="milestone-box">
+          <div class="section-label">60-day checkpoint</div>
+          <ul class="milestone-list">
+            <li>Co-leading sales enablement, tradeshow creative, social templates, ABM visuals, and design asset library</li>
+            <li>One tradeshow's creative production complete with a written post-show retro</li>
+            <li>Brand system fluent — producing routine assets without sign-off from Alex Joyce</li>
+            <li>Three AI design workflows documented; design AI one-sheeter v1 published</li>
+            <li>Visible creative contributor on at least three live Q2 OKRs</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- PHASE 3 -->
+      <div class="phase-panel" id="phase-2">
+        <p class="phase-theme">"The creative engine. Owns design production without prompting."</p>
+        <div class="workstream-grid">
+          <div class="workstream-card">
+            <div class="ws-title">Full design ownership</div>
+            <div class="ws-body">Own sales enablement design, tradeshow creative, social templates, ABM visuals, and the design asset library — all end-to-end with documented brief-to-delivery processes.</div>
+          </div>
+          <div class="workstream-card">
+            <div class="ws-title">Tradeshow creative lead</div>
+            <div class="ws-body">Run the next show's creative independently. Alex Joyce attends in support. Full creative motion documented: brief, design, print coordination, on-site, post-show.</div>
+          </div>
+          <div class="workstream-card">
+            <div class="ws-title">Initial Project: Sales Enablement Kit</div>
+            <div class="ws-body">Scope by Day 75. Build the project plan with deliverables, contributors, and target completion. Kick off Phase 1 — this demonstrates how the role scopes, plans, and ships real design work with cross-functional input.</div>
+          </div>
+          <div class="workstream-card">
+            <div class="ws-title">90-day memo</div>
+            <div class="ws-body">Written memo to Alex Joyce: brand gaps observed, design process improvements, top three recommendations, Q3 creative priorities, and the Sales Enablement Kit plan. The bridge from onboarding into running the design function.</div>
+          </div>
+        </div>
+        <div class="milestone-box">
+          <div class="section-label">90-day checkpoint</div>
+          <ul class="milestone-list">
+            <li>Independently owns all five core design workflows with documented processes</li>
+            <li>Led one tradeshow creative end-to-end with a documented show motion</li>
+            <li>Visible creative contributor on at least four of five active Q2 OKRs</li>
+            <li>Baseline Sales Enablement Kit scoped, planned, and Phase 1 in flight</li>
+            <li>90-day memo delivered; three design process improvement proposals submitted</li>
+            <li>Design asset library v1 organized, documented, and announced to the team</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- PEOPLE -->
+    <div id="people">
+      <h2 class="section-title">Key people</h2>
+      <div class="section-label">Cross-functional partners</div>
+      <div class="people-grid">
+        <div class="person-card">
+          <div class="avatar">AJ</div>
+          <div class="person-info">
+            <div class="person-name">Alex Joyce</div>
+            <div class="person-role">Sr. Marketing Manager</div>
+            <div class="person-need">Direct manager — daily check-ins weeks 1–2, weekly 1:1 thereafter. Creative brief and direction through Day 60</div>
+          </div>
+        </div>
+        <div class="person-card">
+          <div class="avatar">PA</div>
+          <div class="person-info">
+            <div class="person-name">Peter Andersson</div>
+            <div class="person-role">VP Product</div>
+            <div class="person-need">Product fluency deep dive — design accuracy depends on understanding the product portfolio</div>
+          </div>
+        </div>
+        <div class="person-card">
+          <div class="avatar">SK</div>
+          <div class="person-info">
+            <div class="person-name">Simon Knobel</div>
+            <div class="person-role">CEO</div>
+            <div class="person-need">Brand vision, Calyx history, and strategic positioning context for all creative work</div>
+          </div>
+        </div>
+        <div class="person-card">
+          <div class="avatar">AG</div>
+          <div class="person-info">
+            <div class="person-name">Alex Gonzalez</div>
+            <div class="person-role">President</div>
+            <div class="person-need">Calyx history, sales-marketing alignment, and executive perspective on brand</div>
+          </div>
+        </div>
+        <div class="person-card">
+          <div class="avatar">AH</div>
+          <div class="person-info">
+            <div class="person-name">Amie Hadley</div>
+            <div class="person-role">Order Mgmt Specialist</div>
+            <div class="person-need">Production tickets, prepress review, print specs, fulfillment — the bridge between design and production</div>
+          </div>
+        </div>
+        <div class="person-card">
+          <div class="avatar">GF</div>
+          <div class="person-info">
+            <div class="person-name">Greg Furner</div>
+            <div class="person-role">Plant Manager</div>
+            <div class="person-need">Plant tour, production capacity, collateral lead times, and print constraints that affect design specs</div>
+          </div>
+        </div>
+        <div class="person-card">
+          <div class="avatar">XW</div>
+          <div class="person-info">
+            <div class="person-name">Xander Ward</div>
+            <div class="person-role">Director, Command &amp; Rev Ops</div>
+            <div class="person-need">AI tool training, HubSpot access, and ABM board context for visual asset targeting</div>
+          </div>
+        </div>
+        <div class="person-card">
+          <div class="avatar">KB</div>
+          <div class="person-info">
+            <div class="person-name">Kyle Bissell</div>
+            <div class="person-role">Interim VP Sales</div>
+            <div class="person-need">Sales enablement priorities — what assets the team actually uses and what they're missing</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- SCORECARD -->
+    <div id="scorecard">
+      <h2 class="section-title">Scorecard</h2>
+      <p class="sc-intro">Track progress at each checkpoint. Check the box when the milestone is met.</p>
+
+      <div class="sc-progress-wrap">
+        <div class="sc-progress-row">
+          <span class="sc-progress-label">Overall completion</span>
+          <span class="sc-progress-count" id="progress-count">0 / 30</span>
+        </div>
+        <div class="sc-progress-track">
+          <div class="sc-progress-fill" id="progress-fill" style="width:0%"></div>
+        </div>
+      </div>
+
+      <div class="sc-table">
+        <!-- Header -->
+        <div class="sc-thead">
+          <div class="sc-col-measure">Measure</div>
+          <div class="sc-col-day">Day 30</div>
+          <div class="sc-col-day">Day 60</div>
+          <div class="sc-col-day">Day 90</div>
+        </div>
+
+        <!-- Operations -->
+        <div class="sc-group-label">Operations</div>
+        <div class="sc-row-item">
+          <div class="sc-col-measure"><div class="sc-measure-name">Tool fluency</div></div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Access tested across the full design and marketing stack</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Adobe CC, Figma, and HubSpot daily-driver fluent</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Power-user across full design stack and AI design tools</div>
+          </div>
+        </div>
+
+        <div class="sc-row-item">
+          <div class="sc-col-measure"><div class="sc-measure-name">Sales enablement</div></div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Existing assets reviewed; gaps and priorities identified</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Co-producing new assets with Alex Joyce</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Owns end-to-end with a documented brief-to-delivery process</div>
+          </div>
+        </div>
+
+        <div class="sc-row-item">
+          <div class="sc-col-measure"><div class="sc-measure-name">Tradeshow creative</div></div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Tradeshow calendar reviewed; attended any in-window show as observer</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Co-led one show's creative production with a written post-show retro</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Led one show's creative end-to-end with a documented show motion</div>
+          </div>
+        </div>
+
+        <div class="sc-row-item">
+          <div class="sc-col-measure"><div class="sc-measure-name">Social templates</div></div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Existing templates reviewed; platform specs and current calendar understood</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Maintaining and refreshing template library on cadence</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Owns template system with documented standards in the asset library</div>
+          </div>
+        </div>
+
+        <div class="sc-row-item">
+          <div class="sc-col-measure"><div class="sc-measure-name">ABM visuals</div></div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">ABM strategy understood; existing account assets reviewed</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Co-producing account-specific assets in sync with HubSpot ABM board</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Owns ABM visual support independently; coordinating directly with the MC</div>
+          </div>
+        </div>
+
+        <div class="sc-row-item">
+          <div class="sc-col-measure"><div class="sc-measure-name">Design asset library</div></div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Drive audit started; current state documented</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Reorganization in flight; naming and folder standards documented</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Library v1 organized, documented, and announced to the team</div>
+          </div>
+        </div>
+
+        <!-- Fluency -->
+        <div class="sc-group-label">Fluency</div>
+        <div class="sc-row-item">
+          <div class="sc-col-measure"><div class="sc-measure-name">Brand system fluency</div></div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Brand guidelines reviewed; first asset produced and approved</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Producing routine assets without sign-off; brand decisions are sound</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Brand guardian for the team — flagging inconsistencies proactively</div>
+          </div>
+        </div>
+
+        <div class="sc-row-item">
+          <div class="sc-col-measure"><div class="sc-measure-name">AI integration</div></div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">AI training complete; design-specific tools (Firefly, Midjourney) explored</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Three concrete AI design workflows built; one-sheeter v1 published</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">AI integrated across daily design work; team reference for design AI tools</div>
+          </div>
+        </div>
+
+        <!-- Strategic -->
+        <div class="sc-group-label">Strategic</div>
+        <div class="sc-row-item">
+          <div class="sc-col-measure"><div class="sc-measure-name">Q2 OKR contribution</div></div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Active OKRs understood; design needs mapped across all five programs</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Visible creative contributor on 3+ OKRs</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Visible creative contributor on 4+ of 5 active Q2 OKRs</div>
+          </div>
+        </div>
+
+        <div class="sc-row-item">
+          <div class="sc-col-measure"><div class="sc-measure-name">Cross-functional rhythm</div></div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">All cross-functional intros complete; agency partners met</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Standing creative rhythms in place with sales, MC, and agency partners</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Producing joint design output with sales and operations teams independently</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- RISKS -->
+    <div id="risks">
+      <h2 class="section-title">Risks to avoid</h2>
+      <div class="section-label">For the designer and manager</div>
+      <div class="risks-grid">
+        <div class="risk-card">
+          <div class="risk-tag designer">Designer</div>
+          <div class="risk-title">Don't redesign the brand in the first 30 days</div>
+          <div class="risk-body">Absorb the existing system first. Document gaps and propose improvements in the 90-day memo — not in week two.</div>
+        </div>
+        <div class="risk-card">
+          <div class="risk-tag designer">Designer</div>
+          <div class="risk-title">Don't produce without a brief through Day 60</div>
+          <div class="risk-body">Every asset needs a brief from Alex Joyce until the design-to-delivery process is established and trusted.</div>
+        </div>
+        <div class="risk-card">
+          <div class="risk-tag designer">Designer</div>
+          <div class="risk-title">Don't take on every design ask</div>
+          <div class="risk-body">Use Alex Joyce as a scope filter through Day 60. After that, "let me check capacity" before "yes."</div>
+        </div>
+        <div class="risk-card">
+          <div class="risk-tag designer">Designer</div>
+          <div class="risk-title">Don't try to own a Q2 OKR</div>
+          <div class="risk-body">This role is a creative contributor across multiple OKRs — not the delivery owner of any in Q2.</div>
+        </div>
+        <div class="risk-card">
+          <div class="risk-tag manager">Manager</div>
+          <div class="risk-title">Don't transfer Q2 OKR delivery</div>
+          <div class="risk-body">Those OKRs belong to Alex Joyce. Pressure to "just have them run with it" derails the creative ramp.</div>
+        </div>
+        <div class="risk-card">
+          <div class="risk-tag manager">Manager</div>
+          <div class="risk-title">Don't skip written creative briefs</div>
+          <div class="risk-body">Verbal briefs produce misaligned work. Every asset needs a brief — even for quick turnaround requests.</div>
+        </div>
+        <div class="risk-card">
+          <div class="risk-tag manager">Manager</div>
+          <div class="risk-title">Don't maintain back-channels with agencies</div>
+          <div class="risk-body">Route all agency creative requests through the Senior Graphic Designer starting Day 31 — even when it's tempting not to.</div>
+        </div>
+        <div class="risk-card">
+          <div class="risk-tag manager">Manager</div>
+          <div class="risk-title">Don't skip brand orientation time</div>
+          <div class="risk-body">Rushing to production before brand immersion is complete produces assets that require rework. Protect the first 30 days.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="page-footer">
+      <span class="footer-logo">Calyx Containers</span>
+      <span class="footer-note">Confidential · Days 1–90</span>
+    </footer>
+
+  </div><!-- /page-wrap -->
+
+  <script>
+    function switchPhase(idx) {
+      document.querySelectorAll('.phase-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+      document.querySelectorAll('.phase-panel').forEach((p, i) => p.classList.toggle('active', i === idx));
+    }
+
+    function updateProgress() {
+      const all = document.querySelectorAll('.sc-table input[type="checkbox"]');
+      const done = document.querySelectorAll('.sc-table input[type="checkbox"]:checked').length;
+      const total = all.length;
+      document.getElementById('progress-count').textContent = done + ' / ' + total;
+      document.getElementById('progress-fill').style.width = total ? Math.round(done / total * 100) + '%' : '0%';
+    }
+  </script>
+</body>
+</html>

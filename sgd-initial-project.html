@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SGD Initial Project — Baseline Sales Enablement Kit | Calyx Containers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #0033A1;
+      --blue-light: #DBE6FF;
+      --blue-dark: #001F60;
+      --blue-flash: #004FFF;
+      --blue-mist: #202945;
+      --text-primary: #1a1a1a;
+      --text-secondary: #555;
+      --text-tertiary: #888;
+      --border: #e8e8e8;
+      --border-light: #f0f0f0;
+      --bg: #ffffff;
+      --bg-soft: #f8f8f6;
+      --bg-subtle: #f3f3f1;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --font-serif: 'DM Serif Display', Georgia, serif;
+      --font-sans: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--text-primary);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      height: 52px;
+    }
+
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      color: var(--text-primary);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0;
+      list-style: none;
+      margin-left: auto;
+    }
+
+    .nav-links a {
+      font-size: 12.5px;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); background: var(--bg-soft); }
+
+    .nav-home-btn {
+      font-size: 12.5px;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      border: 0.5px solid var(--border);
+      transition: all 0.15s;
+      white-space: nowrap;
+      margin-left: 0.5rem;
+    }
+
+    .nav-home-btn:hover {
+      color: var(--blue);
+      border-color: var(--blue);
+      background: var(--blue-light);
+    }
+
+    /* ── LAYOUT ── */
+    .page-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    /* ── HEADER ── */
+    .page-header {
+      padding-bottom: 2rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .page-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .page-title {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    .page-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .page-meta span + span::before { content: '·'; margin: 0 10px; }
+
+    /* ── SECTION LABELS ── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 1.25rem;
+      margin-top: 2.5rem;
+    }
+
+    .divider {
+      border: none;
+      border-top: 0.5px solid var(--border-light);
+      margin: 2.5rem 0;
+    }
+
+    /* ── OVERVIEW ── */
+    .overview-card {
+      background: var(--bg-soft);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .overview-card p {
+      font-size: 14.5px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    .overview-card p + p { margin-top: 0.875rem; }
+
+    /* ── COLLAB CALLOUT ── */
+    .collab-callout {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: var(--blue-light);
+      border: 0.5px solid #b8cef5;
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .collab-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .collab-body {
+      font-size: 13.5px;
+      color: var(--blue-dark);
+      line-height: 1.65;
+    }
+
+    .collab-body strong {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 2px;
+      font-size: 13px;
+    }
+
+    /* ── TWO-COL GRID ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 0;
+    }
+
+    .detail-card {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.125rem;
+      transition: border-color 0.15s;
+    }
+
+    .detail-card:hover { border-color: #bbb; }
+
+    .detail-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.375rem;
+    }
+
+    .detail-body {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ── OBJECTIVES ── */
+    .objectives-intro {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .objective-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .objective-item {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.125rem;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      transition: border-color 0.15s;
+    }
+
+    .objective-item:hover { border-color: var(--blue); }
+
+    .obj-number {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue);
+      background: var(--blue-light);
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .obj-text {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .obj-text strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    /* ── DELIVERABLES ── */
+    .deliverables-intro {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .deliverable-asset {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 10px;
+      transition: border-color 0.15s;
+    }
+
+    .deliverable-asset:hover { border-color: #bbb; }
+
+    .asset-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 1rem 1.25rem;
+      background: var(--bg);
+    }
+
+    .asset-number {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--blue-dark);
+      background: var(--blue-light);
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .asset-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+      flex: 1;
+    }
+
+    .asset-format {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      background: var(--bg-subtle);
+      padding: 3px 9px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .asset-body {
+      padding: 0 1.25rem 1rem 3.5rem;
+    }
+
+    .asset-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 0.625rem;
+    }
+
+    .asset-inputs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .asset-input-tag {
+      font-size: 11.5px;
+      color: var(--text-tertiary);
+      background: var(--bg-soft);
+      border: 0.5px solid var(--border);
+      padding: 2px 9px;
+      border-radius: 4px;
+    }
+
+    /* ── COLLABORATORS ── */
+    .collab-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 9px;
+    }
+
+    .collab-card {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 0.875rem 1rem;
+      display: flex;
+      gap: 11px;
+      align-items: flex-start;
+      transition: border-color 0.15s;
+    }
+
+    .collab-card:hover { border-color: #bbb; }
+
+    .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--blue-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--blue-dark);
+      flex-shrink: 0;
+    }
+
+    .collab-info { flex: 1; min-width: 0; }
+    .collab-name { font-size: 13px; font-weight: 500; }
+    .collab-role { font-size: 11.5px; color: var(--text-secondary); margin-top: 1px; }
+    .collab-contribution { font-size: 11.5px; color: var(--text-tertiary); margin-top: 3px; line-height: 1.45; }
+
+    /* ── MILESTONES ── */
+    .milestones-intro {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .milestone-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .milestone-timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 8px;
+      bottom: 8px;
+      width: 1.5px;
+      background: var(--border);
+    }
+
+    .milestone-row {
+      position: relative;
+      padding: 0 0 1.25rem 1.25rem;
+    }
+
+    .milestone-row:last-child { padding-bottom: 0; }
+
+    .milestone-row::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--blue);
+      z-index: 1;
+    }
+
+    .milestone-when {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 3px;
+    }
+
+    .milestone-what {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 3px;
+    }
+
+    .milestone-detail {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    /* ── SUCCESS ── */
+    .success-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .success-card {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.125rem;
+      transition: border-color 0.15s;
+    }
+
+    .success-card:hover { border-color: var(--blue); }
+
+    .success-tag {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 2px 9px;
+      border-radius: 12px;
+      margin-bottom: 7px;
+      display: inline-block;
+      background: var(--blue-light);
+      color: var(--blue-dark);
+    }
+
+    .success-title { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+    .success-body { font-size: 12.5px; color: var(--text-secondary); line-height: 1.55; }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 0.5px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: var(--font-serif);
+      font-size: 14px;
+      color: var(--text-tertiary);
+    }
+
+    .footer-note {
+      font-size: 11.5px;
+      color: var(--text-tertiary);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .page-wrap { padding: 2rem 1.25rem 4rem; }
+      .two-col, .collab-grid, .success-grid { grid-template-columns: 1fr; }
+      .page-title { font-size: 26px; }
+      .site-nav { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+      .asset-body { padding-left: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav">
+    <a class="nav-logo" href="index.html">Calyx Onboarding</a>
+    <ul class="nav-links">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#objectives">Objectives</a></li>
+      <li><a href="#deliverables">Deliverables</a></li>
+      <li><a href="#collaborators">Collaborators</a></li>
+      <li><a href="#milestones">Milestones</a></li>
+    </ul>
+    <a class="nav-home-btn" href="index.html">&#8592; Home</a>
+  </nav>
+
+  <div class="page-wrap">
+
+    <!-- HEADER -->
+    <header class="page-header">
+      <div class="page-eyebrow">Initial Project · Senior Graphic Designer</div>
+      <h1 class="page-title">Baseline Sales Enablement Kit</h1>
+      <div class="page-meta">
+        <span>Calyx Containers</span>
+        <span>Owner: Senior Graphic Designer</span>
+        <span>Scope: Days 61–90+</span>
+        <span>Confidential</span>
+      </div>
+    </header>
+
+    <!-- COLLAB CALLOUT -->
+    <div class="collab-callout">
+      <div class="collab-icon">⚑</div>
+      <div class="collab-body">
+        <strong>This project is a team effort</strong>
+        The Senior Graphic Designer owns design production and project management — but does not work alone. Alex Joyce provides strategic direction and messaging. Sales counterparts (Kyle Bissell and the field team) provide feedback on what assets they need and how they use them. Gathering those inputs is part of the work.
+      </div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div id="overview">
+      <div class="section-label">Overview</div>
+      <div class="overview-card">
+        <p>The Baseline Sales Enablement Kit is the Senior Graphic Designer's Initial Project — a complete set of foundational sales assets that give the Calyx sales team what they need to tell the brand story, communicate product value, and move conversations forward at every stage of the funnel.</p>
+        <p>This kit doesn't exist yet in a complete, current, brand-accurate form. Building it requires the designer to synthesize everything learned during the first 60 days of onboarding — product knowledge, brand guidelines, production workflows, and sales priorities — into five polished deliverables. The project is scoped and kicked off within the first 90 days. Full completion follows in Q3.</p>
+        <p>Success is not just about design quality. It's about how the SGD manages a multi-asset project with cross-functional contributors, incorporates sales feedback into the creative, and ships work that the team actually uses.</p>
+      </div>
+
+      <div class="two-col">
+        <div class="detail-card">
+          <div class="detail-label">Project type</div>
+          <div class="detail-body">Cross-functional design production — five distinct assets with shared brand and messaging requirements.</div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-label">Sponsoring manager</div>
+          <div class="detail-body">Alex Joyce, Sr. Marketing Manager. Provides strategic direction, messaging input, and final sign-off on all assets.</div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-label">Primary owner</div>
+          <div class="detail-body">Senior Graphic Designer. Responsible for project management, design production, and coordinating all contributor input.</div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-label">Target format</div>
+          <div class="detail-body">All assets delivered in final production-ready files, with editable source files stored in the Calyx Marketing Drive design asset library.</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- OBJECTIVES -->
+    <div id="objectives">
+      <div class="section-label">Objectives</div>
+      <p class="objectives-intro">The Baseline Sales Enablement Kit has four objectives — each maps to a real gap in how the sales team currently operates.</p>
+      <div class="objective-list">
+        <div class="objective-item">
+          <div class="obj-number">1</div>
+          <div class="obj-text">
+            <strong>Give the sales team a complete, on-brand asset library</strong>
+            The sales team should never have to use outdated, off-brand, or piecemeal materials in a customer conversation. This kit establishes the baseline they'll use going forward.
+          </div>
+        </div>
+        <div class="objective-item">
+          <div class="obj-number">2</div>
+          <div class="obj-text">
+            <strong>Create a durable template system for future updates</strong>
+            Every asset should be built in a way that allows future updates without starting from scratch. Templates, defined styles, and source files stay in the design asset library.
+          </div>
+        </div>
+        <div class="objective-item">
+          <div class="obj-number">3</div>
+          <div class="obj-text">
+            <strong>Demonstrate how the SGD manages a multi-asset production project</strong>
+            This project is also an evaluation of how the designer scopes, coordinates, handles feedback, and ships. The process matters as much as the output.
+          </div>
+        </div>
+        <div class="objective-item">
+          <div class="obj-number">4</div>
+          <div class="obj-text">
+            <strong>Build a foundation for the Calyx rebrand</strong>
+            The brand system and visual decisions made in this kit will inform the broader rebrand being scoped. Getting the baseline right matters beyond just these five assets.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- DELIVERABLES -->
+    <div id="deliverables">
+      <h2 class="section-title">Deliverables</h2>
+      <p class="deliverables-intro">Five assets make up the Baseline Sales Enablement Kit. Each requires distinct inputs from different contributors — gathering those inputs is part of the designer's project management responsibility.</p>
+
+      <div class="deliverable-asset">
+        <div class="asset-header">
+          <div class="asset-number">1</div>
+          <div class="asset-name">Master Sales Deck</div>
+          <div class="asset-format">Presentation</div>
+        </div>
+        <div class="asset-body">
+          <p class="asset-desc">The primary brand and product story deck used by the sales team in customer-facing conversations. Covers company overview, product portfolio (Flexible Packaging, Rigid Packaging, Calyx Cure, Labels), key differentiators, and a call to action. Built to be modular so reps can pull relevant slides for different conversations.</p>
+          <div class="asset-inputs">
+            <span class="asset-input-tag">Messaging: Alex Joyce</span>
+            <span class="asset-input-tag">Product content: Peter Andersson</span>
+            <span class="asset-input-tag">Sales feedback: Kyle Bissell</span>
+            <span class="asset-input-tag">Format: Google Slides + PDF export</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="deliverable-asset">
+        <div class="asset-header">
+          <div class="asset-number">2</div>
+          <div class="asset-name">Product One-Sheeter</div>
+          <div class="asset-format">Print + Digital</div>
+        </div>
+        <div class="asset-body">
+          <p class="asset-desc">A single-page visual reference covering the full Calyx product portfolio — one asset that gives a prospect a complete picture of what Calyx offers. Designed to work both as a printed leave-behind and a digital PDF send. Concise, visually strong, and brand-accurate.</p>
+          <div class="asset-inputs">
+            <span class="asset-input-tag">Messaging: Alex Joyce</span>
+            <span class="asset-input-tag">Product specs: Peter Andersson</span>
+            <span class="asset-input-tag">Print specs: Amie Hadley</span>
+            <span class="asset-input-tag">Format: Print-ready PDF + digital version</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="deliverable-asset">
+        <div class="asset-header">
+          <div class="asset-number">3</div>
+          <div class="asset-name">History of Calyx</div>
+          <div class="asset-format">Print + Digital</div>
+        </div>
+        <div class="asset-body">
+          <p class="asset-desc">A brand story asset that traces Calyx's founding, growth, and mission. Used in sales conversations to build credibility and emotional connection. Should feel premium and editorial — not a corporate timeline. The narrative is co-developed with Alex Joyce and Simon Knobel; the design and format belong to the SGD.</p>
+          <div class="asset-inputs">
+            <span class="asset-input-tag">Narrative: Alex Joyce + Simon Knobel</span>
+            <span class="asset-input-tag">Photography: existing brand library</span>
+            <span class="asset-input-tag">Format: Printed booklet + PDF</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="deliverable-asset">
+        <div class="asset-header">
+          <div class="asset-number">4</div>
+          <div class="asset-name">Price Sheets</div>
+          <div class="asset-format">Print + Digital</div>
+        </div>
+        <div class="asset-body">
+          <p class="asset-desc">Formatted, brand-accurate price sheets for the relevant product lines. Design must be clean, easy to read, and updatable — pricing changes, and the format needs to accommodate those updates without a full redesign. Specific pricing content is provided by the sales team; the SGD owns layout, formatting, and brand consistency.</p>
+          <div class="asset-inputs">
+            <span class="asset-input-tag">Pricing content: Kyle Bissell + sales team</span>
+            <span class="asset-input-tag">Product categories: Peter Andersson</span>
+            <span class="asset-input-tag">Format: Editable template + PDF export</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="deliverable-asset">
+        <div class="asset-header">
+          <div class="asset-number">5</div>
+          <div class="asset-name">Nurture Email Campaigns</div>
+          <div class="asset-format">HubSpot</div>
+        </div>
+        <div class="asset-body">
+          <p class="asset-desc">A set of designed, branded email templates for nurture sequences built and deployed in HubSpot. The SGD owns the visual design and template structure; Alex Joyce owns messaging strategy and copy. Templates must be responsive, on-brand, and functional within HubSpot's email builder. Coordinate with Xander Ward for HubSpot setup, list segmentation, and deployment.</p>
+          <div class="asset-inputs">
+            <span class="asset-input-tag">Copy + strategy: Alex Joyce</span>
+            <span class="asset-input-tag">HubSpot setup: Xander Ward</span>
+            <span class="asset-input-tag">Segmentation: Xander Ward + sales team</span>
+            <span class="asset-input-tag">Format: HubSpot email templates</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- COLLABORATORS -->
+    <div id="collaborators">
+      <h2 class="section-title">Collaborators</h2>
+      <div class="section-label">Who contributes and what they provide</div>
+      <div class="collab-grid">
+        <div class="collab-card">
+          <div class="avatar">AJ</div>
+          <div class="collab-info">
+            <div class="collab-name">Alex Joyce</div>
+            <div class="collab-role">Sr. Marketing Manager</div>
+            <div class="collab-contribution">Strategic direction, messaging, copy for all five assets, and final sign-off</div>
+          </div>
+        </div>
+        <div class="collab-card">
+          <div class="avatar">KB</div>
+          <div class="collab-info">
+            <div class="collab-name">Kyle Bissell</div>
+            <div class="collab-role">Interim VP Sales</div>
+            <div class="collab-contribution">Sales team feedback on deck and one-sheeter; pricing content for price sheets</div>
+          </div>
+        </div>
+        <div class="collab-card">
+          <div class="avatar">PA</div>
+          <div class="collab-info">
+            <div class="collab-name">Peter Andersson</div>
+            <div class="collab-role">VP Product</div>
+            <div class="collab-contribution">Product content accuracy for the deck, one-sheeter, and price sheets</div>
+          </div>
+        </div>
+        <div class="collab-card">
+          <div class="avatar">SK</div>
+          <div class="collab-info">
+            <div class="collab-name">Simon Knobel</div>
+            <div class="collab-role">CEO</div>
+            <div class="collab-contribution">Co-develops the History of Calyx narrative; final review on brand story</div>
+          </div>
+        </div>
+        <div class="collab-card">
+          <div class="avatar">XW</div>
+          <div class="collab-info">
+            <div class="collab-name">Xander Ward</div>
+            <div class="collab-role">Director, Command &amp; Rev Ops</div>
+            <div class="collab-contribution">HubSpot email setup, list segmentation, and deployment of nurture campaigns</div>
+          </div>
+        </div>
+        <div class="collab-card">
+          <div class="avatar">AH</div>
+          <div class="collab-info">
+            <div class="collab-name">Amie Hadley</div>
+            <div class="collab-role">Order Mgmt Specialist</div>
+            <div class="collab-contribution">Print specs, prepress review, and production submission for printed assets</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- MILESTONES -->
+    <div id="milestones">
+      <h2 class="section-title">Milestones</h2>
+      <p class="milestones-intro">The kit is built in three phases. Phase 1 — scope lock and contributor alignment — is the only hard Day 90 commitment. Full production follows in Q3.</p>
+
+      <div class="milestone-timeline">
+        <div class="milestone-row">
+          <div class="milestone-when">Day 61–65</div>
+          <div class="milestone-what">Kick off &amp; scope initiation</div>
+          <div class="milestone-detail">SGD proposes kit scope and asset list to Alex Joyce. Confirm all five deliverables, identify contributors per asset, and schedule input-gathering sessions with each contributor.</div>
+        </div>
+        <div class="milestone-row">
+          <div class="milestone-when">Day 66–74</div>
+          <div class="milestone-what">Contributor sessions &amp; content gathering</div>
+          <div class="milestone-detail">Structured sessions with Peter Andersson (product content), Kyle Bissell (sales feedback and pricing), Simon Knobel (History of Calyx narrative), and Alex Joyce (messaging and copy direction). HubSpot setup session with Xander Ward. Notes and briefs documented after each session.</div>
+        </div>
+        <div class="milestone-row">
+          <div class="milestone-when">Day 75</div>
+          <div class="milestone-what">Scope document approved — Phase 1 complete</div>
+          <div class="milestone-detail">One-page scope document signed off by Alex Joyce. Confirms all five assets, contributors, content inputs received, design direction agreed, and Phase 2 production timeline set. This is the Day 90 checkpoint commitment.</div>
+        </div>
+        <div class="milestone-row">
+          <div class="milestone-when">Post Day 90 · Phase 2</div>
+          <div class="milestone-what">Asset production &amp; contributor review</div>
+          <div class="milestone-detail">All five assets designed and in review. Each contributor reviews for accuracy in their area. Feedback incorporated. Alex Joyce approval received on each asset before it's considered final.</div>
+        </div>
+        <div class="milestone-row">
+          <div class="milestone-when">Post Day 90 · Phase 3</div>
+          <div class="milestone-what">Kit delivered &amp; deployed</div>
+          <div class="milestone-detail">Final assets delivered to the sales team. Source files and templates added to the design asset library. Nurture email campaigns live in HubSpot. Kit announced to the team. Assets added to the SGD onboarding checklist for future hires.</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- SUCCESS -->
+    <div id="success">
+      <h2 class="section-title">How success is measured</h2>
+      <div class="section-label">Evaluation criteria</div>
+      <div class="success-grid">
+        <div class="success-card">
+          <div class="success-tag">Completion</div>
+          <div class="success-title">Scope locked by Day 75</div>
+          <div class="success-body">The scope document is approved by Alex Joyce. All five assets confirmed, contributors aligned, and Phase 2 timeline set.</div>
+        </div>
+        <div class="success-card">
+          <div class="success-tag">Completion</div>
+          <div class="success-title">Phase 1 in flight at Day 90</div>
+          <div class="success-body">At least two contributor sessions completed and documented. Content-gathering actively underway — not deferred to Q3.</div>
+        </div>
+        <div class="success-card">
+          <div class="success-tag">Quality</div>
+          <div class="success-title">All five assets approved and delivered</div>
+          <div class="success-body">Each asset reviewed by its contributors and signed off by Alex Joyce before delivery to the sales team. No placeholder content or unresolved feedback in the final files.</div>
+        </div>
+        <div class="success-card">
+          <div class="success-tag">Quality</div>
+          <div class="success-title">Sales team actively uses the kit</div>
+          <div class="success-body">The ultimate test — the sales team uses these assets in customer conversations without being asked. Kyle Bissell confirms the kit covers what the team needs.</div>
+        </div>
+        <div class="success-card">
+          <div class="success-tag">Process</div>
+          <div class="success-title">Demonstrates project ownership</div>
+          <div class="success-body">The SGD manages contributors, timelines, and feedback rounds independently. Alex Joyce is a reviewer and approver — not the driver of the project.</div>
+        </div>
+        <div class="success-card">
+          <div class="success-tag">Process</div>
+          <div class="success-title">Mentioned in the 90-day memo</div>
+          <div class="success-body">The kit — its scope, contributor inputs, design direction, and Phase 2 timeline — appears in the written 90-day observation memo to Alex Joyce.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="page-footer">
+      <span class="footer-logo">Calyx Containers</span>
+      <span class="footer-note">Confidential · Senior Graphic Designer Initial Project</span>
+    </footer>
+
+  </div><!-- /page-wrap -->
+
+</body>
+</html>
