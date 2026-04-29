@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MC Initial Project — Production Field Guide | Calyx Containers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #0033A1;
+      --blue-light: #DBE6FF;
+      --blue-dark: #001F60;
+      --blue-flash: #004FFF;
+      --blue-mist: #202945;
+      --text-primary: #1a1a1a;
+      --text-secondary: #555;
+      --text-tertiary: #888;
+      --border: #e8e8e8;
+      --border-light: #f0f0f0;
+      --bg: #ffffff;
+      --bg-soft: #f8f8f6;
+      --bg-subtle: #f3f3f1;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --font-serif: 'DM Serif Display', Georgia, serif;
+      --font-sans: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--text-primary);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      height: 52px;
+    }
+
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      color: var(--text-primary);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0;
+      list-style: none;
+      margin-left: auto;
+    }
+
+    .nav-links a {
+      font-size: 12.5px;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); background: var(--bg-soft); }
+
+    .nav-home-btn {
+      font-size: 12.5px;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      border: 0.5px solid var(--border);
+      transition: all 0.15s;
+      white-space: nowrap;
+      margin-left: 0.5rem;
+    }
+
+    .nav-home-btn:hover {
+      color: var(--blue);
+      border-color: var(--blue);
+      background: var(--blue-light);
+    }
+
+    /* ── LAYOUT ── */
+    .page-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    /* ── HEADER ── */
+    .page-header {
+      padding-bottom: 2rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .page-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .page-title {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    .page-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .page-meta span + span::before { content: '·'; margin: 0 10px; }
+
+    /* ── SECTION LABELS ── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 1.25rem;
+      margin-top: 2.5rem;
+    }
+
+    .divider {
+      border: none;
+      border-top: 0.5px solid var(--border-light);
+      margin: 2.5rem 0;
+    }
+
+    /* ── OVERVIEW ── */
+    .overview-card {
+      background: var(--bg-soft);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .overview-card p {
+      font-size: 14.5px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    .overview-card p + p { margin-top: 0.875rem; }
+
+    /* ── TWO-COL GRID ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 0;
+    }
+
+    .detail-card {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.125rem;
+      transition: border-color 0.15s;
+    }
+
+    .detail-card:hover { border-color: #bbb; }
+
+    .detail-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.375rem;
+    }
+
+    .detail-body {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ── OBJECTIVES ── */
+    .objectives-intro {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .objective-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .objective-item {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.125rem;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      transition: border-color 0.15s;
+    }
+
+    .objective-item:hover { border-color: var(--blue); }
+
+    .obj-number {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue);
+      background: var(--blue-light);
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .obj-text {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .obj-text strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    /* ── AUDIENCE ── */
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 9px;
+    }
+
+    .audience-card {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 0.875rem 1rem;
+      display: flex;
+      gap: 11px;
+      align-items: flex-start;
+      transition: border-color 0.15s;
+    }
+
+    .audience-card:hover { border-color: #bbb; }
+
+    .audience-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--blue);
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .audience-info { flex: 1; min-width: 0; }
+    .audience-name { font-size: 13px; font-weight: 500; }
+    .audience-role { font-size: 11.5px; color: var(--text-secondary); margin-top: 1px; }
+    .audience-note { font-size: 11.5px; color: var(--text-tertiary); margin-top: 3px; line-height: 1.45; }
+
+    /* ── DELIVERABLES ── */
+    .deliverable-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .deliverable-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 1rem 1.125rem;
+      border-bottom: 0.5px solid var(--border-light);
+      transition: background 0.12s;
+    }
+
+    .deliverable-item:last-child { border-bottom: none; }
+    .deliverable-item:hover { background: var(--bg-soft); }
+
+    .deliverable-phase {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--blue-dark);
+      background: var(--blue-light);
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .deliverable-body { flex: 1; }
+    .deliverable-title { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+    .deliverable-desc { font-size: 12.5px; color: var(--text-secondary); line-height: 1.55; }
+
+    /* ── MILESTONES ── */
+    .milestones-intro {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .milestone-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .milestone-timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 8px;
+      bottom: 8px;
+      width: 1.5px;
+      background: var(--border);
+    }
+
+    .milestone-row {
+      position: relative;
+      padding: 0 0 1.25rem 1.25rem;
+    }
+
+    .milestone-row:last-child { padding-bottom: 0; }
+
+    .milestone-row::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--blue);
+      z-index: 1;
+    }
+
+    .milestone-when {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 3px;
+    }
+
+    .milestone-what {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 3px;
+    }
+
+    .milestone-detail {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    /* ── SUCCESS ── */
+    .success-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .success-card {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.125rem;
+      transition: border-color 0.15s;
+    }
+
+    .success-card:hover { border-color: var(--blue); }
+
+    .success-tag {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 2px 9px;
+      border-radius: 12px;
+      margin-bottom: 7px;
+      display: inline-block;
+      background: var(--blue-light);
+      color: var(--blue-dark);
+    }
+
+    .success-title { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+    .success-body { font-size: 12.5px; color: var(--text-secondary); line-height: 1.55; }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 0.5px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: var(--font-serif);
+      font-size: 14px;
+      color: var(--text-tertiary);
+    }
+
+    .footer-note {
+      font-size: 11.5px;
+      color: var(--text-tertiary);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .page-wrap { padding: 2rem 1.25rem 4rem; }
+      .two-col, .audience-grid, .success-grid { grid-template-columns: 1fr; }
+      .page-title { font-size: 26px; }
+      .site-nav { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav">
+    <a class="nav-logo" href="index.html">Calyx Onboarding</a>
+    <ul class="nav-links">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#objectives">Objectives</a></li>
+      <li><a href="#deliverables">Deliverables</a></li>
+      <li><a href="#milestones">Milestones</a></li>
+      <li><a href="#success">Success</a></li>
+    </ul>
+    <a class="nav-home-btn" href="index.html">&#8592; Home</a>
+  </nav>
+
+  <div class="page-wrap">
+
+    <!-- HEADER -->
+    <header class="page-header">
+      <div class="page-eyebrow">Initial Project · Marketing Coordinator</div>
+      <h1 class="page-title">Production Field Guide</h1>
+      <div class="page-meta">
+        <span>Calyx Containers</span>
+        <span>Owner: Marketing Coordinator</span>
+        <span>Scope: Days 61–90</span>
+        <span>Confidential</span>
+      </div>
+    </header>
+
+    <!-- OVERVIEW -->
+    <div id="overview">
+      <div class="section-label">Overview</div>
+      <div class="overview-card">
+        <p>The Production Field Guide is the Marketing Coordinator's Initial Project — a structured reference document that maps end-to-end production workflows for Calyx's marketing materials. It exists so any marketer, new or established, can independently navigate a production request from brief to fulfillment without relying on tribal knowledge.</p>
+        <p>This project is not a simple task assigned to fill the calendar. It is a deliberate choice: the work forces the Marketing Coordinator to engage deeply with every function that touches production — from creative briefing and prepress through to Amie Hadley's fulfillment process — and to emerge from that investigation with documented, shareable systems.</p>
+        <p>The guide is scoped and kicked off within the first 90 days. It is not expected to be finished by Day 90. What matters at that checkpoint is that the scope is locked, contributors are aligned, and Phase 1 is actively in flight.</p>
+      </div>
+
+      <div class="two-col">
+        <div class="detail-card">
+          <div class="detail-label">Project type</div>
+          <div class="detail-body">Internal reference documentation — a living operational guide, not a one-time deliverable.</div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-label">Sponsoring manager</div>
+          <div class="detail-body">Alex Joyce, Sr. Marketing Manager. Final sign-off on scope, structure, and release.</div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-label">Primary owner</div>
+          <div class="detail-body">Marketing Coordinator. Responsible for scoping, research, writing, and coordinating input from subject-matter contributors.</div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-label">Target format</div>
+          <div class="detail-body">Google Doc (primary), with a summary reference card in the Calyx Marketing Drive shared folder.</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- OBJECTIVES -->
+    <div id="objectives">
+      <div class="section-label">Objectives</div>
+      <p class="objectives-intro">The Production Field Guide has four objectives. Each maps to a gap the Marketing Coordinator will have already observed in the first 60 days of onboarding.</p>
+      <div class="objective-list">
+        <div class="objective-item">
+          <div class="obj-number">1</div>
+          <div class="obj-text">
+            <strong>Eliminate production bottlenecks caused by knowledge gaps</strong>
+            Map every step of the production request process — from brief submission through prepress, approval, fulfillment, and shipping — so no request stalls because someone doesn't know the next step.
+          </div>
+        </div>
+        <div class="objective-item">
+          <div class="obj-number">2</div>
+          <div class="obj-text">
+            <strong>Create a durable onboarding resource for future marketing hires</strong>
+            Any future Marketing Coordinator or intern should be able to independently handle a production request within their first two weeks using this guide alone.
+          </div>
+        </div>
+        <div class="objective-item">
+          <div class="obj-number">3</div>
+          <div class="obj-text">
+            <strong>Surface and document the informal rules that govern production</strong>
+            Calyx's production system runs on tribal knowledge — lead times, vendor preferences, file spec requirements, and fulfillment exceptions that live in people's heads. The guide pulls those into a single written record.
+          </div>
+        </div>
+        <div class="objective-item">
+          <div class="obj-number">4</div>
+          <div class="obj-text">
+            <strong>Demonstrate how the Marketing Coordinator scopes, plans, and ships work</strong>
+            This project is also an evaluation instrument. How the MC approaches the scope, manages contributors, handles ambiguity, and hits milestones is evidence of how they'll manage real workstreams going forward.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- SCOPE -->
+    <div id="scope">
+      <h2 class="section-title">Scope</h2>
+      <div class="section-label">What's in — and what's not</div>
+      <div class="two-col">
+        <div class="detail-card">
+          <div class="detail-label">In scope</div>
+          <div class="detail-body">
+            Marketing production request intake and ticketing · Prepress review and file specification standards · Internal approval workflow · Vendor and agency production hand-offs · Sample kit production process · Tradeshow materials production · Fulfillment and shipping process (Amie Hadley's workflow) · Lead times by material type · Common failure points and how to avoid them
+          </div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-label">Out of scope</div>
+          <div class="detail-body">
+            Brand guidelines (maintained separately) · Creative strategy or campaign planning · Shopify/ecommerce product listings · Agency contract terms or vendor pricing · IT or systems procurement
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- AUDIENCE -->
+    <div id="audience">
+      <h2 class="section-title">Audience</h2>
+      <div class="section-label">Primary readers and contributors</div>
+      <div class="audience-grid">
+        <div class="audience-card">
+          <div class="audience-dot"></div>
+          <div class="audience-info">
+            <div class="audience-name">Marketing Coordinator</div>
+            <div class="audience-role">Primary author &amp; owner</div>
+            <div class="audience-note">Uses the guide daily to manage production requests end-to-end</div>
+          </div>
+        </div>
+        <div class="audience-card">
+          <div class="audience-dot"></div>
+          <div class="audience-info">
+            <div class="audience-name">Amie Hadley</div>
+            <div class="audience-role">Order Mgmt Specialist</div>
+            <div class="audience-note">Key SME for fulfillment, shipping, and sample kit workflows</div>
+          </div>
+        </div>
+        <div class="audience-card">
+          <div class="audience-dot"></div>
+          <div class="audience-info">
+            <div class="audience-name">Senior Graphic Designer</div>
+            <div class="audience-role">Creative production partner</div>
+            <div class="audience-note">Input on prepress specs, file standards, and agency hand-off process</div>
+          </div>
+        </div>
+        <div class="audience-card">
+          <div class="audience-dot"></div>
+          <div class="audience-info">
+            <div class="audience-name">Alex Joyce</div>
+            <div class="audience-role">Sr. Marketing Manager</div>
+            <div class="audience-note">Scope approval and final sign-off. Uses guide for coverage during absence</div>
+          </div>
+        </div>
+        <div class="audience-card">
+          <div class="audience-dot"></div>
+          <div class="audience-info">
+            <div class="audience-name">Greg Furner</div>
+            <div class="audience-role">Plant Manager</div>
+            <div class="audience-note">Input on production capacity, collateral lead times, and plant-sourced materials</div>
+          </div>
+        </div>
+        <div class="audience-card">
+          <div class="audience-dot"></div>
+          <div class="audience-info">
+            <div class="audience-name">Future Marketing Hires</div>
+            <div class="audience-role">Onboarding audience</div>
+            <div class="audience-note">The ultimate test — any new marketer should be able to self-serve on production using this guide</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- DELIVERABLES -->
+    <div id="deliverables">
+      <h2 class="section-title">Deliverables</h2>
+      <div class="section-label">Phased output</div>
+      <div class="deliverable-list">
+        <div class="deliverable-item">
+          <div class="deliverable-phase">Phase 1</div>
+          <div class="deliverable-body">
+            <div class="deliverable-title">Scope document &amp; contributor map</div>
+            <div class="deliverable-desc">A one-page scope document confirming what the guide will cover, who contributes, and what the milestone dates are. Approved by Alex Joyce by Day 75.</div>
+          </div>
+        </div>
+        <div class="deliverable-item">
+          <div class="deliverable-phase">Phase 1</div>
+          <div class="deliverable-body">
+            <div class="deliverable-title">Production process interviews (documented)</div>
+            <div class="deliverable-desc">Structured notes from sessions with Amie Hadley, the Senior Graphic Designer, Greg Furner, and any agency partners who touch production. Completed by end of Phase 1.</div>
+          </div>
+        </div>
+        <div class="deliverable-item">
+          <div class="deliverable-phase">Phase 2</div>
+          <div class="deliverable-body">
+            <div class="deliverable-title">Production Field Guide v1 (draft)</div>
+            <div class="deliverable-desc">Full draft of the guide in Google Doc format — request intake, prepress, approvals, vendor hand-offs, fulfillment, shipping, and lead time reference table.</div>
+          </div>
+        </div>
+        <div class="deliverable-item">
+          <div class="deliverable-phase">Phase 2</div>
+          <div class="deliverable-body">
+            <div class="deliverable-title">SME review &amp; sign-off</div>
+            <div class="deliverable-desc">Each contributing SME reviews and confirms accuracy of their section. Revisions incorporated. Alex Joyce approval received.</div>
+          </div>
+        </div>
+        <div class="deliverable-item">
+          <div class="deliverable-phase">Phase 3</div>
+          <div class="deliverable-body">
+            <div class="deliverable-title">Production Field Guide v1 (published)</div>
+            <div class="deliverable-desc">Final version shared to the Calyx Marketing Drive. Summary reference card created. Guide announced to the marketing team and added to the onboarding checklist.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- MILESTONES -->
+    <div id="milestones">
+      <h2 class="section-title">Milestones</h2>
+      <p class="milestones-intro">The guide is built in three phases. Phase 1 is the only phase with a hard Day 90 commitment — the goal by Day 90 is a locked scope and an active Phase 1, not a finished guide.</p>
+
+      <div class="milestone-timeline">
+        <div class="milestone-row">
+          <div class="milestone-when">Day 61–65</div>
+          <div class="milestone-what">Kick off &amp; scope initiation</div>
+          <div class="milestone-detail">MC proposes initial scope to Alex Joyce. Identify contributors. Schedule SME sessions. Align on format and target audience.</div>
+        </div>
+        <div class="milestone-row">
+          <div class="milestone-when">Day 66–74</div>
+          <div class="milestone-what">SME interviews &amp; discovery</div>
+          <div class="milestone-detail">Structured sessions with Amie Hadley (fulfillment), Senior Graphic Designer (prepress/files), Greg Furner (plant capacity), and Alex Joyce (approvals/agency hand-offs). Notes documented after each session.</div>
+        </div>
+        <div class="milestone-row">
+          <div class="milestone-when">Day 75</div>
+          <div class="milestone-what">Scope document approved — Phase 1 complete</div>
+          <div class="milestone-detail">One-page scope document signed off by Alex Joyce. Confirms what's in, what's out, deliverables, and Phase 2 timeline. This is the Day 90 checkpoint commitment.</div>
+        </div>
+        <div class="milestone-row">
+          <div class="milestone-when">Post Day 90 · Phase 2</div>
+          <div class="milestone-what">Guide draft written &amp; reviewed</div>
+          <div class="milestone-detail">Full draft written. Each SME reviews their section. Revisions incorporated. Approval from Alex Joyce.</div>
+        </div>
+        <div class="milestone-row">
+          <div class="milestone-when">Post Day 90 · Phase 3</div>
+          <div class="milestone-what">Published &amp; shared with the team</div>
+          <div class="milestone-detail">Final guide published to Marketing Drive. Summary reference card created. Announced to the marketing team. Added to MC onboarding checklist.</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- SUCCESS -->
+    <div id="success">
+      <h2 class="section-title">How success is measured</h2>
+      <div class="section-label">Evaluation criteria</div>
+      <div class="success-grid">
+        <div class="success-card">
+          <div class="success-tag">Completion</div>
+          <div class="success-title">Scope locked by Day 75</div>
+          <div class="success-body">The one-page scope document is approved by Alex Joyce. Contributors confirmed. Phase 2 timeline set.</div>
+        </div>
+        <div class="success-card">
+          <div class="success-tag">Completion</div>
+          <div class="success-title">Phase 1 in flight at Day 90</div>
+          <div class="success-body">At least one SME session completed and documented. Discovery work actively underway — not deferred to Q3.</div>
+        </div>
+        <div class="success-card">
+          <div class="success-tag">Quality</div>
+          <div class="success-title">SME accuracy sign-off</div>
+          <div class="success-body">Every contributing SME confirms their section is accurate before the guide is published. No critical process errors in the final document.</div>
+        </div>
+        <div class="success-card">
+          <div class="success-tag">Quality</div>
+          <div class="success-title">Self-serve usable by a new hire</div>
+          <div class="success-body">Any future marketing hire can handle a production request within two weeks using only this guide — no tribal knowledge required.</div>
+        </div>
+        <div class="success-card">
+          <div class="success-tag">Process</div>
+          <div class="success-title">Demonstrates project ownership</div>
+          <div class="success-body">The MC manages scope, contributors, and milestones independently. Alex Joyce is a reviewer, not a driver.</div>
+        </div>
+        <div class="success-card">
+          <div class="success-tag">Process</div>
+          <div class="success-title">Mentioned in the 90-day memo</div>
+          <div class="success-body">The Production Field Guide — its scope, what was learned, and what Phase 2 will cover — appears in the written 90-day observation memo to Alex Joyce.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="page-footer">
+      <span class="footer-logo">Calyx Containers</span>
+      <span class="footer-note">Confidential · Marketing Coordinator Initial Project</span>
+    </footer>
+
+  </div><!-- /page-wrap -->
+
+</body>
+</html>
