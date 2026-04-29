@@ -11,11 +11,11 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --green: #1D9E75;
-      --green-light: #E1F5EE;
-      --green-dark: #0F6E56;
-      --blue-light: #E6F1FB;
-      --blue-dark: #185FA5;
+      --blue: #0033A1;
+      --blue-light: #DBE6FF;
+      --blue-dark: #001F60;
+      --blue-light: #DBE6FF;
+      --blue-dark: #001F60;
       --text-primary: #1a1a1a;
       --text-secondary: #555;
       --text-tertiary: #888;
@@ -113,7 +113,7 @@
       font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--green);
+      color: var(--blue);
       margin-bottom: 0.5rem;
     }
 
@@ -205,13 +205,13 @@
       transition: border-color 0.15s;
     }
 
-    .outcome-item:hover { border-color: var(--green); }
+    .outcome-item:hover { border-color: var(--blue); }
 
     .outcome-dot {
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--green);
+      background: var(--blue);
       flex-shrink: 0;
       margin-top: 4px;
     }
@@ -242,8 +242,8 @@
     .phase-tab:hover { background: var(--bg-soft); border-color: #ccc; }
 
     .phase-tab.active {
-      background: var(--green);
-      border-color: var(--green);
+      background: var(--blue);
+      border-color: var(--blue);
       color: #fff;
       font-weight: 500;
     }
@@ -262,7 +262,7 @@
       color: var(--text-secondary);
       margin-bottom: 1.25rem;
       padding-left: 1.125rem;
-      border-left: 2.5px solid var(--green);
+      border-left: 2.5px solid var(--blue);
       line-height: 1.5;
     }
 
@@ -354,13 +354,13 @@
       width: 34px;
       height: 34px;
       border-radius: 50%;
-      background: var(--green-light);
+      background: var(--blue-light);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 11px;
       font-weight: 500;
-      color: var(--green-dark);
+      color: var(--blue-dark);
       flex-shrink: 0;
     }
 
@@ -377,154 +377,156 @@
       line-height: 1.65;
     }
 
-    .sc-filter {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 1.125rem;
-      flex-wrap: wrap;
-    }
-
-    .sc-filter-btn {
-      padding: 5px 15px;
-      border-radius: 20px;
-      border: 0.5px solid var(--border);
-      background: var(--bg);
-      cursor: pointer;
-      font-size: 12px;
-      font-family: var(--font-sans);
-      color: var(--text-secondary);
-      transition: all 0.12s;
-    }
-
-    .sc-filter-btn:hover { background: var(--bg-soft); }
-
-    .sc-filter-btn.active {
-      background: var(--green);
-      border-color: var(--green);
-      color: #fff;
-    }
-
-    .progress-wrap {
+    .sc-progress-wrap {
       background: var(--bg-soft);
       border-radius: var(--radius-md);
       padding: 1rem 1.375rem;
-      margin-bottom: 1.125rem;
+      margin-bottom: 1.5rem;
     }
 
-    .progress-row {
+    .sc-progress-row {
       display: flex;
       align-items: center;
       margin-bottom: 8px;
     }
 
-    .progress-label { font-size: 13px; font-weight: 500; }
+    .sc-progress-label { font-size: 13px; font-weight: 500; }
+    .sc-progress-count { font-size: 12px; color: var(--text-tertiary); margin-left: auto; }
 
-    .progress-count {
-      font-size: 12px;
-      color: var(--text-tertiary);
-      margin-left: auto;
-    }
-
-    .progress-track {
+    .sc-progress-track {
       height: 5px;
       background: var(--border);
       border-radius: 4px;
       overflow: hidden;
     }
 
-    .progress-fill {
+    .sc-progress-fill {
       height: 100%;
-      background: var(--green);
+      background: var(--blue);
       border-radius: 4px;
-      transition: width 0.35s ease;
+      transition: width 0.3s ease;
     }
 
-    .sc-item {
+    /* Table layout */
+    .sc-table {
       border: 0.5px solid var(--border);
       border-radius: var(--radius-md);
-      margin-bottom: 7px;
       overflow: hidden;
-      transition: border-color 0.15s;
     }
 
-    .sc-item:hover { border-color: #bbb; }
-    .sc-item.hidden { display: none; }
-
-    .sc-header {
-      padding: 0.8rem 1.125rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      user-select: none;
+    .sc-thead {
+      display: grid;
+      grid-template-columns: 160px repeat(3, 1fr);
+      background: var(--bg-soft);
+      border-bottom: 0.5px solid var(--border);
+      padding: 0;
     }
 
-    .sc-title { font-size: 13px; font-weight: 500; flex: 1; }
-
-    .sc-pips { display: flex; gap: 5px; align-items: center; }
-
-    .sc-pip {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      border: 1.5px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
+    .sc-thead .sc-col-measure,
+    .sc-thead .sc-col-day {
+      padding: 10px 14px;
+      font-size: 11px;
       font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
       color: var(--text-tertiary);
-      cursor: pointer;
-      transition: all 0.12s;
-      background: var(--bg);
     }
 
-    .sc-pip:hover { border-color: var(--green); color: var(--green); }
-
-    .sc-pip.done {
-      background: var(--green);
-      border-color: var(--green);
-      color: #fff;
+    .sc-thead .sc-col-day {
+      border-left: 0.5px solid var(--border);
+      color: var(--blue-dark);
     }
 
-    .sc-chevron {
-      font-size: 9px;
+    .sc-group-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       color: var(--text-tertiary);
-      transition: transform 0.15s;
+      background: var(--bg-soft);
+      padding: 7px 14px;
+      border-top: 0.5px solid var(--border);
     }
 
-    .sc-header.open .sc-chevron { transform: rotate(90deg); }
-
-    .sc-body {
-      display: none;
-      padding: 0 1.125rem 1rem;
+    .sc-row-item {
+      display: grid;
+      grid-template-columns: 160px repeat(3, 1fr);
       border-top: 0.5px solid var(--border-light);
     }
 
-    .sc-body.open { display: block; }
+    .sc-row-item:hover { background: var(--bg-soft); }
 
-    .sc-rows { display: flex; flex-direction: column; gap: 8px; padding-top: 0.875rem; }
-
-    .sc-row {
-      display: grid;
-      grid-template-columns: 72px 1fr;
-      gap: 10px;
-      align-items: start;
+    .sc-col-measure {
+      padding: 14px;
+      display: flex;
+      align-items: center;
     }
 
-    .sc-day-label {
-      font-size: 11px;
+    .sc-measure-name {
+      font-size: 13px;
       font-weight: 500;
-      color: var(--text-tertiary);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding-top: 1px;
+      color: var(--text-primary);
+      line-height: 1.4;
     }
 
-    .sc-day-text {
-      font-size: 12.5px;
+    .sc-col-day {
+      padding: 12px 14px;
+      border-left: 0.5px solid var(--border-light);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    /* Custom checkbox */
+    .sc-check {
+      display: flex;
+      align-items: flex-start;
+      cursor: pointer;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .sc-check input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .sc-checkmark {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 1.5px solid var(--border);
+      background: var(--bg);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.12s;
+    }
+
+    .sc-check input:checked + .sc-checkmark {
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+
+    .sc-check input:checked + .sc-checkmark::after {
+      content: '';
+      width: 9px;
+      height: 5px;
+      border-left: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      transform: rotate(-45deg) translateY(-1px);
+      display: block;
+    }
+
+    .sc-check:hover .sc-checkmark { border-color: var(--blue); }
+
+    .sc-day-desc {
+      font-size: 12px;
       color: var(--text-secondary);
-      line-height: 1.55;
+      line-height: 1.5;
     }
 
     /* ── RISKS ── */
@@ -554,8 +556,26 @@
       display: inline-block;
     }
 
-    .risk-tag.coordinator { background: var(--green-light); color: var(--green-dark); }
-    .risk-tag.manager { background: var(--blue-light); color: var(--blue-dark); }
+    .risk-tag.coordinator { background: var(--blue-light); color: var(--blue-dark); }
+    .risk-tag.manager { background: #EEF2FF; color: #3730A3; }
+
+    .nav-home-btn {
+      font-size: 12.5px;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      border: 0.5px solid var(--border);
+      transition: all 0.15s;
+      white-space: nowrap;
+      margin-left: 0.5rem;
+    }
+
+    .nav-home-btn:hover {
+      color: var(--blue);
+      border-color: var(--blue);
+      background: var(--blue-light);
+    }
 
     .risk-title { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
     .risk-body { font-size: 12.5px; color: var(--text-secondary); line-height: 1.55; }
@@ -589,6 +609,10 @@
       .page-title { font-size: 26px; }
       .site-nav { padding: 0 1.25rem; }
       .nav-links { display: none; }
+      .sc-thead, .sc-row-item { grid-template-columns: 120px repeat(3, 1fr); }
+      .sc-col-day { padding: 10px 8px; }
+      .sc-day-desc { font-size: 11px; }
+      .sc-measure-name { font-size: 12px; }
     }
   </style>
 </head>
@@ -604,6 +628,7 @@
       <li><a href="#people">People</a></li>
       <li><a href="#scorecard">Scorecard</a></li>
     </ul>
+    <a class="nav-home-btn" href="index.html">&#8592; Home</a>
   </nav>
 
   <div class="page-wrap">
@@ -857,27 +882,233 @@
 
     <!-- SCORECARD -->
     <div id="scorecard">
-      <h2 class="section-title">Interactive scorecard</h2>
-      <p class="sc-intro">Expand any row to see what each checkpoint looks like for that measure. Mark milestones complete as they are hit — the three pips represent Day 30, Day 60, and Day 90.</p>
+      <h2 class="section-title">Scorecard</h2>
+      <p class="sc-intro">Track progress at each checkpoint. Check the box when the milestone is met.</p>
 
-      <div class="sc-filter">
-        <button class="sc-filter-btn active" onclick="filterSC('all', this)">All</button>
-        <button class="sc-filter-btn" onclick="filterSC('operations', this)">Operations</button>
-        <button class="sc-filter-btn" onclick="filterSC('fluency', this)">Fluency</button>
-        <button class="sc-filter-btn" onclick="filterSC('strategic', this)">Strategic</button>
-      </div>
-
-      <div class="progress-wrap">
-        <div class="progress-row">
-          <span class="progress-label">Overall completion</span>
-          <span class="progress-count" id="progress-count">0 / 30 milestones</span>
+      <div class="sc-progress-wrap">
+        <div class="sc-progress-row">
+          <span class="sc-progress-label">Overall completion</span>
+          <span class="sc-progress-count" id="progress-count">0 / 30</span>
         </div>
-        <div class="progress-track">
-          <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+        <div class="sc-progress-track">
+          <div class="sc-progress-fill" id="progress-fill" style="width:0%"></div>
         </div>
       </div>
 
-      <div id="scorecard-items"></div>
+      <div class="sc-table">
+        <!-- Header -->
+        <div class="sc-thead">
+          <div class="sc-col-measure">Measure</div>
+          <div class="sc-col-day">Day 30</div>
+          <div class="sc-col-day">Day 60</div>
+          <div class="sc-col-day">Day 90</div>
+        </div>
+
+        <!-- Tool fluency -->
+        <div class="sc-group-label">Operations</div>
+        <div class="sc-row-item">
+          <div class="sc-col-measure">
+            <div class="sc-measure-name">Tool fluency</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Access tested across the full marketing stack</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Daily-driver tools fluent — HubSpot, social, project management</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Power-user fluent on HubSpot, AI tools, and project management</div>
+          </div>
+        </div>
+
+        <div class="sc-row-item">
+          <div class="sc-col-measure">
+            <div class="sc-measure-name">Sample kits</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Current state understood; gaps identified</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Co-leading process revamp toward full ownership</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Owns end-to-end with a documented SOP</div>
+          </div>
+        </div>
+
+        <div class="sc-row-item">
+          <div class="sc-col-measure">
+            <div class="sc-measure-name">Tradeshows</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Calendar reviewed; attended any in-window show as observer</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Co-led one show with logistics responsibility and written retro</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Led one show end-to-end with a documented show motion</div>
+          </div>
+        </div>
+
+        <div class="sc-row-item">
+          <div class="sc-col-measure">
+            <div class="sc-measure-name">Social media</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Reviewed cadence and tools; understands current calendar</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Maintaining calendar and posting cadence</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Owns calendar, posting, and engagement tracking</div>
+          </div>
+        </div>
+
+        <div class="sc-row-item">
+          <div class="sc-col-measure">
+            <div class="sc-measure-name">ABM support</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">ABM strategy understood; board structure clear</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Maintaining HubSpot ABM board with weekly sales sync</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Owns ABM operational support; weekly sync running independently</div>
+          </div>
+        </div>
+
+        <div class="sc-row-item">
+          <div class="sc-col-measure">
+            <div class="sc-measure-name">Blog &amp; SEO</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Content process reviewed</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Coordinating production — briefs, timelines, publish</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Owns end-to-end coordination on cadence</div>
+          </div>
+        </div>
+
+        <div class="sc-row-item">
+          <div class="sc-col-measure">
+            <div class="sc-measure-name">Drive organization</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Audit started</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Reorganization in flight</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Maintained structure with documented standards</div>
+          </div>
+        </div>
+
+        <!-- Fluency -->
+        <div class="sc-group-label">Fluency</div>
+        <div class="sc-row-item">
+          <div class="sc-col-measure">
+            <div class="sc-measure-name">Product fluency</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Foundational training complete across all four product lines</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Demo-fluent on all four lines; product cheat sheet published</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Demo-fluent unaided; capable of walking others through the portfolio</div>
+          </div>
+        </div>
+
+        <div class="sc-row-item">
+          <div class="sc-col-measure">
+            <div class="sc-measure-name">AI integration</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">AI training complete; one-sheeter v1 drafted</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Three concrete AI workflows built; one-sheeter v2 published</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">AI integrated across daily work; serves as team reference for the stack</div>
+          </div>
+        </div>
+
+        <!-- Strategic -->
+        <div class="sc-group-label">Strategic</div>
+        <div class="sc-row-item">
+          <div class="sc-col-measure">
+            <div class="sc-measure-name">Q2 OKR contribution</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Active OKRs understood; context established across all five programs</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Visible contributor on 3+ OKRs</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Visible contributor on 4+ of 5 active OKRs</div>
+          </div>
+        </div>
+
+        <div class="sc-row-item sc-row-last">
+          <div class="sc-col-measure">
+            <div class="sc-measure-name">Cross-functional rhythm</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">All 14 cross-functional intros complete</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Standing rhythms in place with key partners</div>
+          </div>
+          <div class="sc-col-day">
+            <label class="sc-check"><input type="checkbox" onchange="updateProgress()"><span class="sc-checkmark"></span></label>
+            <div class="sc-day-desc">Producing joint output with operations and sales teams</div>
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <hr class="divider" />
@@ -945,87 +1176,14 @@
       document.querySelectorAll('.phase-panel').forEach((p, i) => p.classList.toggle('active', i === idx));
     }
 
-    // ── SCORECARD DATA ──
-    const scorecardData = [
-      { id: 'tools', label: 'Tool fluency', cat: 'operations', days: ['Access tested across the full marketing stack', 'Daily-driver tools fluent — HubSpot, social, project management', 'Power-user fluent on HubSpot, AI tools, and project management'] },
-      { id: 'product', label: 'Product fluency', cat: 'fluency', days: ['Foundational training complete across all four product lines', 'Demo-fluent on all four lines; product cheat sheet published', 'Demo-fluent unaided; capable of walking others through the portfolio'] },
-      { id: 'kits', label: 'Sample kits', cat: 'operations', days: ['Current state understood; gaps identified', 'Co-leading process revamp toward full ownership', 'Owns end-to-end with a documented SOP'] },
-      { id: 'shows', label: 'Tradeshows', cat: 'operations', days: ['Calendar reviewed; attended any in-window show as observer', 'Co-led one show with logistics responsibility and written retro', 'Led one show end-to-end with a documented show motion'] },
-      { id: 'social', label: 'Social media', cat: 'operations', days: ['Reviewed cadence and tools; understands current calendar', 'Maintaining calendar and posting cadence', 'Owns calendar, posting, and engagement tracking'] },
-      { id: 'abm', label: 'ABM support', cat: 'operations', days: ['ABM strategy understood; board structure clear', 'Maintaining HubSpot ABM board with weekly sales sync', 'Owns ABM operational support; weekly sync with sales running independently'] },
-      { id: 'blog', label: 'Blog & SEO', cat: 'operations', days: ['Content process reviewed', 'Coordinating production — briefs, timelines, publish', 'Owns end-to-end coordination on cadence'] },
-      { id: 'drive', label: 'Drive organization', cat: 'operations', days: ['Audit started', 'Reorganization in flight', 'Maintained structure with documented standards'] },
-      { id: 'okrs', label: 'Q2 OKR contribution', cat: 'strategic', days: ['Active OKRs understood; context established across all five programs', 'Visible contributor on 3+ OKRs', 'Visible contributor on 4+ of 5 active OKRs'] },
-      { id: 'ai', label: 'AI integration', cat: 'fluency', days: ['AI training complete; one-sheeter v1 drafted', 'Three concrete AI workflows built; one-sheeter v2 published', 'AI integrated across daily work; serves as team reference for the stack'] },
-    ];
-
-    const state = {};
-    scorecardData.forEach(item => { state[item.id] = [false, false, false]; });
-
-    function buildScorecard() {
-      const container = document.getElementById('scorecard-items');
-      container.innerHTML = '';
-      scorecardData.forEach(item => {
-        const el = document.createElement('div');
-        el.className = 'sc-item';
-        el.dataset.cat = item.cat;
-        el.id = 'sci-' + item.id;
-
-        const pips = state[item.id].map((done, i) => {
-          const label = ['30', '60', '90'][i];
-          return `<div class="sc-pip ${done ? 'done' : ''}" onclick="togglePip('${item.id}',${i},event)" title="Day ${label}">${label}</div>`;
-        }).join('');
-
-        el.innerHTML = `
-          <div class="sc-header" onclick="toggleBody('${item.id}', this)">
-            <div class="sc-title">${item.label}</div>
-            <div class="sc-pips">${pips}</div>
-            <div class="sc-chevron">▶</div>
-          </div>
-          <div class="sc-body" id="scb-${item.id}">
-            <div class="sc-rows">
-              ${item.days.map((d, i) => `
-                <div class="sc-row">
-                  <div class="sc-day-label">Day ${['30','60','90'][i]}</div>
-                  <div class="sc-day-text">${d}</div>
-                </div>`).join('')}
-            </div>
-          </div>`;
-        container.appendChild(el);
-      });
-      updateProgress();
-    }
-
-    function toggleBody(id, header) {
-      const body = document.getElementById('scb-' + id);
-      const isOpen = body.classList.contains('open');
-      body.classList.toggle('open', !isOpen);
-      header.classList.toggle('open', !isOpen);
-    }
-
-    function togglePip(id, idx, e) {
-      e.stopPropagation();
-      state[id][idx] = !state[id][idx];
-      buildScorecard();
-    }
-
+    // ── SCORECARD PROGRESS ──
     function updateProgress() {
-      const total = scorecardData.length * 3;
-      let done = 0;
-      scorecardData.forEach(item => { done += state[item.id].filter(Boolean).length; });
-      document.getElementById('progress-count').textContent = done + ' / ' + total + ' milestones';
-      document.getElementById('progress-fill').style.width = Math.round(done / total * 100) + '%';
+      const all = document.querySelectorAll('.sc-table input[type="checkbox"]');
+      const done = document.querySelectorAll('.sc-table input[type="checkbox"]:checked').length;
+      const total = all.length;
+      document.getElementById('progress-count').textContent = done + ' / ' + total;
+      document.getElementById('progress-fill').style.width = total ? Math.round(done / total * 100) + '%' : '0%';
     }
-
-    function filterSC(cat, btn) {
-      document.querySelectorAll('.sc-filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      document.querySelectorAll('.sc-item').forEach(item => {
-        item.classList.toggle('hidden', cat !== 'all' && item.dataset.cat !== cat);
-      });
-    }
-
-    buildScorecard();
   </script>
 </body>
 </html>
