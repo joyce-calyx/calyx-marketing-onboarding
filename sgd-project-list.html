@@ -237,7 +237,11 @@ const categories = [
     note: null,
     open: false,
     items: [
-      { id: 'ir-email', t: 'Email signatures — multiple versions', note: null },
+      { id: 'ir-email', t: 'Email signatures', note: null, sub: [
+        { id: 'ir-email-generic', t: 'Generic Calyx logo' },
+        { id: 'ir-email-cure', t: 'Calyx Cure' },
+        { id: 'ir-email-dram', t: 'Dram' }
+      ]},
       { id: 'ir-bizcard', t: 'Business cards', note: null },
       { id: 'ir-letterhead', t: 'Letterhead', note: null }
     ]
