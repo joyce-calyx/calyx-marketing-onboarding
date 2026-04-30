@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calyx — SGD Project List</title>
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #ffffff; --bg2: #f7f7f5; --bg3: #f0efe9;
+  --text: #1a1a1a; --text2: #555550; --text3: #888880;
+  --border: rgba(0,0,0,0.1); --border2: rgba(0,0,0,0.18);
+  --radius: 12px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1c1a; --bg2: #252523; --bg3: #2e2e2b;
+    --text: #f0efe9; --text2: #b0afa8; --text3: #777770;
+    --border: rgba(255,255,255,0.1); --border2: rgba(255,255,255,0.18);
+  }
+}
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: var(--bg3); color: var(--text); min-height: 100vh; padding: 2rem 1rem; }
+.container { max-width: 720px; margin: 0 auto; }
+.page-header { background: var(--bg); border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem; border: 0.5px solid var(--border); }
+.logo-row { display: flex; align-items: center; gap: 12px; margin-bottom: 1.25rem; }
+.logo-mark { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.logo-mark svg { width: 22px; height: 22px; fill: #fff; }
+.logo-text { font-size: 15px; font-weight: 600; color: var(--text); }
+.logo-sub { font-size: 12px; color: var(--text3); margin-top: 1px; }
+.role-pill { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 12px; border-radius: 99px; margin-bottom: 10px; }
+.page-header h1 { font-size: 24px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+.page-header p { font-size: 14px; color: var(--text2); line-height: 1.6; margin-bottom: 1.25rem; }
+.top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.top-bar span { font-size: 13px; color: var(--text2); }
+.reset-btn { font-size: 12px; color: var(--text3); background: none; border: none; cursor: pointer; padding: 5px 8px; font-family: inherit; }
+.reset-btn:hover { color: var(--text2); }
+.progress-track { background: var(--bg3); border-radius: 99px; height: 6px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 99px; transition: width 0.35s ease; }
+
+/* Category cards */
+.category { background: var(--bg); border-radius: var(--radius); border: 0.5px solid var(--border); margin-bottom: 12px; overflow: hidden; }
+.category-header { padding: 14px 18px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none; transition: background 0.15s; }
+.category-header:hover { background: var(--bg2); }
+.cat-left { display: flex; align-items: flex-start; gap: 12px; }
+.cat-name { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.3; }
+.cat-note { font-size: 12px; color: var(--text3); margin-top: 3px; line-height: 1.4; max-width: 480px; }
+.cat-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; margin-left: 12px; }
+.cat-count { font-size: 12px; color: var(--text3); }
+.chevron { width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; color: var(--text3); font-size: 10px; transition: transform 0.2s; }
+.chevron.open { transform: rotate(180deg); }
+.category-body { border-top: 0.5px solid var(--border); }
+.category-body.hidden { display: none; }
+
+/* Items */
+.item { display: flex; align-items: flex-start; gap: 10px; padding: 9px 18px; border-bottom: 0.5px solid var(--border); cursor: pointer; transition: background 0.12s; }
+.item:last-child { border-bottom: none; }
+.item:hover { background: var(--bg2); }
+.item.sub-item { padding-left: 44px; background: var(--bg2); }
+.item.sub-item:hover { background: var(--bg3); }
+.cb { width: 17px; height: 17px; min-width: 17px; border-radius: 4px; border: 1.5px solid var(--border2); display: flex; align-items: center; justify-content: center; margin-top: 2px; transition: all 0.15s; background: transparent; flex-shrink: 0; }
+.cb.on { border-color: var(--accent); background: var(--accent); }
+.ck { display: none; width: 9px; height: 6px; border-left: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(-45deg) translate(1px, -1px); }
+.cb.on .ck { display: block; }
+.item-content { flex: 1; min-width: 0; }
+.item-text { font-size: 13px; color: var(--text2); line-height: 1.5; transition: color 0.15s; }
+.item-text.done { color: var(--text3); text-decoration: line-through; }
+.item-note { font-size: 12px; color: var(--text3); margin-top: 3px; line-height: 1.45; }
+.item-date { font-size: 11px; color: var(--text3); white-space: nowrap; padding-top: 3px; flex-shrink: 0; }
+.item-date:empty { display: none; }
+
+/* Status badge */
+.status-badge { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 99px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+.status-initial { background: #EEEDFE; color: #534AB7; }
+@media (prefers-color-scheme: dark) { .status-initial { background: #26215C; color: #AFA9EC; } }
+
+.home-btn { margin-left: auto; font-size: 12px; color: var(--text3); text-decoration: none; padding: 6px 12px; border-radius: 8px; border: 0.5px solid var(--border2); transition: all 0.15s; white-space: nowrap; }
+.home-btn:hover { color: var(--text); border-color: var(--text3); background: var(--bg2); }
+.footer { text-align: center; padding: 2rem 0 1rem; font-size: 12px; color: var(--text3); }
+@media (max-width: 480px) { body { padding: 1rem 0.75rem; } .page-header { padding: 1.25rem; } .category-header { padding: 12px 14px; } .item { padding: 9px 14px; } .item.sub-item { padding-left: 36px; } }
+
+:root { --accent: #5850A0; }
+.logo-mark { background: #5850A0; }
+.progress-fill { background: #5850A0; }
+.role-pill { background: #EEEDFE; color: #5850A0; }
+@media (prefers-color-scheme: dark) { .role-pill { background: #26215C; color: #AFA9EC; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="page-header">
+    <div class="logo-row">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 3.54 2.61 6.47 6 6.93V20h2v-4.07c3.39-.46 6-3.39 6-6.93 0-3.87-3.13-7-7-7zm0 12c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
+        </svg>
+      </div>
+      <div>
+        <div class="logo-text">Calyx</div>
+        <div class="logo-sub">Marketing Team</div>
+      </div>
+      <a class="home-btn" href="index.html">&#8592; Home</a>
+    </div>
+    <div class="role-pill">Senior Graphic Designer</div>
+    <h1>Project list</h1>
+    <p>A living list of design projects — updated as new work is scoped and prioritized. Check off items as they're completed.</p>
+    <div class="top-bar">
+      <span id="glabel">0 of 0 complete</span>
+      <button class="reset-btn" onclick="resetAll()">Reset all</button>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="gbar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div id="categories"></div>
+  <div class="footer">Calyx Marketing · SGD Project List · Progress saves in your browser</div>
+</div>
+<script>
+const STORE_KEY = 'calyx_sgd_projects_v1';
+let checks = {};
+try { checks = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) {}
+
+function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(checks)); } catch(e) {} }
+
+function resetAll() {
+  if (!confirm('Reset all progress? This cannot be undone.')) return;
+  checks = {}; save(); render();
+}
+
+function toggle(id) {
+  if (checks[id]) { delete checks[id]; } else {
+    checks[id] = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+  save();
+  const el = document.querySelector('[data-id="' + id + '"]');
+  if (!el) return;
+  const isDone = !!checks[id];
+  el.querySelector('.cb').classList.toggle('on', isDone);
+  el.querySelector('.item-text').classList.toggle('done', isDone);
+  el.querySelector('.item-date').textContent = checks[id] || '';
+  updateProgress();
+}
+
+function toggleCat(id) {
+  const body = document.getElementById('body-' + id);
+  const chev = document.getElementById('chev-' + id);
+  const isHidden = body.classList.contains('hidden');
+  body.classList.toggle('hidden', !isHidden);
+  chev.classList.toggle('open', isHidden);
+}
+
+function updateProgress() {
+  let total = 0, done = 0;
+  document.querySelectorAll('[data-id]').forEach(el => {
+    total++;
+    if (checks[el.dataset.id]) done++;
+  });
+  const pct = total ? Math.round(done / total * 100) : 0;
+  document.getElementById('glabel').textContent = done + ' of ' + total + ' complete (' + pct + '%)';
+  document.getElementById('gbar').style.width = pct + '%';
+  categories.forEach(cat => {
+    let ct = 0, cd = 0;
+    cat.items.forEach(item => {
+      ct++;
+      if (checks[item.id]) cd++;
+    });
+    const lbl = document.getElementById('cnt-' + cat.id);
+    if (lbl) lbl.textContent = cd + '/' + ct;
+  });
+}
+
+const categories = [
+  {
+    id: 'email',
+    name: 'Email Campaigns',
+    note: null,
+    open: true,
+    items: [
+      { id: 'email-abm', t: 'ABM Marketing', note: null },
+      { id: 'email-nurture', t: 'Nurture Marketing', note: null }
+    ]
+  },
+  {
+    id: 'growworld',
+    name: 'Grow World Enrichment',
+    note: 'Create Calyx × Grow World branded content for Trial participants — welcoming them to the Trials and providing general Calyx education alongside product-specific education relevant to their Trial.',
+    open: true,
+    items: [
+      { id: 'gw-welcome', t: 'Welcome kit — participant welcome assets', note: null },
+      { id: 'gw-calyx-edu', t: 'General Calyx education content', note: null },
+      { id: 'gw-product-edu', t: 'Trial-specific product education content', note: null }
+    ]
+  },
+  {
+    id: 'tradeshow',
+    name: 'Trade Show',
+    note: null,
+    open: true,
+    items: [
+      { id: 'ts-popup', t: 'Pop-up kits', note: null },
+      { id: 'ts-print', t: 'Print assets', note: null }
+    ]
+  },
+  {
+    id: 'sales',
+    name: 'Sales Enablement',
+    note: 'Initial Project — see SGD initial project page for full scope and milestones.',
+    open: true,
+    badge: 'Initial Project',
+    items: [
+      { id: 'se-deck', t: 'Master sales presentation', note: null },
+      { id: 'se-onepagers', t: 'Product one-pagers — Flexible Packaging, Rigid, Labels, Calyx Cure', note: null },
+      { id: 'se-onesheeters', t: 'Product one-sheeters', note: null },
+      { id: 'se-history', t: 'History of Calyx', note: null },
+      { id: 'se-nurture', t: 'Nurture email campaigns (built in HubSpot)', note: null }
+    ]
+  },
+  {
+    id: 'internal',
+    name: 'Internal Resources',
+    note: null,
+    open: false,
+    items: [
+      { id: 'ir-email', t: 'Email signatures — multiple versions', note: null },
+      { id: 'ir-bizcard', t: 'Business cards', note: null },
+      { id: 'ir-letterhead', t: 'Letterhead', note: null }
+    ]
+  },
+  {
+    id: 'misc',
+    name: 'Miscellaneous Projects',
+    note: null,
+    open: false,
+    items: [
+      { id: 'misc-drive', t: 'Revising Google Drive structure', note: null },
+      { id: 'misc-naming', t: 'Creating file naming conventions', note: null },
+      { id: 'misc-workflow', t: 'Building artwork sharing workflow', note: null }
+    ]
+  }
+];
+
+function render() {
+  const container = document.getElementById('categories');
+  container.innerHTML = '';
+  categories.forEach(cat => {
+    const card = document.createElement('div');
+    card.className = 'category';
+
+    const headerHTML = '<div class="category-header" onclick="toggleCat(\'' + cat.id + '\')">' +
+      '<div class="cat-left">' +
+      '<div>' +
+      '<div class="cat-name">' + cat.name + (cat.badge ? ' <span class="status-badge status-initial">' + cat.badge + '</span>' : '') + '</div>' +
+      (cat.note ? '<div class="cat-note">' + cat.note + '</div>' : '') +
+      '</div></div>' +
+      '<div class="cat-right">' +
+      '<span class="cat-count" id="cnt-' + cat.id + '">0/0</span>' +
+      '<span class="chevron ' + (cat.open ? 'open' : '') + '" id="chev-' + cat.id + '">▼</span>' +
+      '</div></div>';
+
+    card.innerHTML = headerHTML;
+
+    const body = document.createElement('div');
+    body.className = 'category-body' + (cat.open ? '' : ' hidden');
+    body.id = 'body-' + cat.id;
+
+    cat.items.forEach(item => {
+      const isDone = !!checks[item.id];
+      const el = document.createElement('div');
+      el.className = 'item';
+      el.dataset.id = item.id;
+      el.onclick = () => toggle(item.id);
+      el.innerHTML =
+        '<div class="cb ' + (isDone ? 'on' : '') + '"><div class="ck"></div></div>' +
+        '<div class="item-content">' +
+          '<div class="item-text ' + (isDone ? 'done' : '') + '">' + item.t + '</div>' +
+          (item.note ? '<div class="item-note">' + item.note + '</div>' : '') +
+        '</div>' +
+        '<span class="item-date">' + (typeof checks[item.id] === 'string' ? checks[item.id] : '') + '</span>';
+      body.appendChild(el);
+    });
+
+    card.appendChild(body);
+    container.appendChild(card);
+  });
+  updateProgress();
+}
+
+render();
+</script>
+</body>
+</html>
