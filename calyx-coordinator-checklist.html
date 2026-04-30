@@ -72,8 +72,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
 .item-text { font-size: 13px; color: var(--text2); line-height: 1.5; flex: 1; transition: color 0.15s; }
 .item-text.done { color: var(--text3); text-decoration: line-through; }
 .item-owner { font-size: 11px; color: var(--text3); white-space: nowrap; padding-top: 3px; }
-.new-tag { display: inline-block; font-size: 10px; font-weight: 600; background: #FAEEDA; color: #854F0B; padding: 1px 6px; border-radius: 99px; margin-left: 6px; vertical-align: middle; }
-@media (prefers-color-scheme: dark) { .new-tag { background: #412402; color: #EF9F27; } }
+.item-date { font-size: 11px; color: var(--text3); white-space: nowrap; padding-top: 3px; }
+.item-date:empty { display: none; }
 .footer { text-align: center; padding: 2rem 0 1rem; font-size: 12px; color: var(--text3); }
 .home-btn { margin-left: auto; font-size: 12px; color: var(--text3); text-decoration: none; padding: 6px 12px; border-radius: 8px; border: 0.5px solid var(--border2); transition: all 0.15s; white-space: nowrap; }
 .home-btn:hover { color: var(--text); border-color: var(--text3); background: var(--bg2); }
@@ -118,7 +118,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
 const ROLE_KEY = 'coordinator_v1';
 const phases = [{"id":"p30","badge":"30 days","bc":"b30","name":"Orientation + building a foundation","goal":"Get fully set up, integrated with resources and team, and fluent with the Calyx brand.","open":true,"sections":[{"label":"Administrative","items":[{"t":"Complete payroll setup in Gusto","o":"HR"},{"t":"Set up Bonusly & Callie Points","o":"HR"},{"t":"Gain access to Gmail, Slack, HubSpot, Gong, Adobe, Shopify","o":"IT"},{"t":"Set up AI resources and project management platform","o":"IT"},{"t":"Get access to Emerald Intel and Zoom Info","o":"IT"},{"t":"Set up workstation — desk, laptop, email signature","o":"IT"},{"t":"Review org chart and understand reporting structure","o":"Manager"},{"t":"Meet partner contacts: Beard Bros, Grasslands, Creative Bend, CRC","o":"Joyce"},{"t":"Learn shipping procedures with Amie & Julie","o":"Amie/Julie"},{"t":"Schedule recurring weekly 1:1 with manager — agree on format and agenda","o":"Manager","n":true}]},{"label":"Cultural","items":[{"t":"Review Calyx company core values","o":"Manager"},{"t":"Attend marketing team welcome lunch","o":"Team"},{"t":"Complete introductory 1:1s with ELT and relevant stakeholders","o":"Manager"},{"t":"Review communication norms, feedback expectations and office rhythms","o":"Manager"},{"t":"Review brand guidelines — tone of voice, visual identity, brand dos and don'ts","o":"Joyce","n":true},{"t":"Competitive landscape overview — who Calyx competes with and how the brand is positioned","o":"Joyce","n":true}]},{"label":"Product & Marketing","items":[{"t":"Complete foundational product training checklist spreadsheet","o":"Peter/Simon"},{"t":"Attend focused product training session with Peter","o":"Peter"},{"t":"Attend focused product training session with Simon","o":"Simon"},{"t":"Attend History of Calyx training with Alex & Simon","o":"Alex/Simon"},{"t":"Complete AI platforms training with Xander","o":"Xander"},{"t":"Review AI one-sheeter — platforms, when to use them, best practices","o":"Xander"},{"t":"Complete production process training with Amie (tickets → prepress → production → final)","o":"Amie"},{"t":"Review active marketing priorities, ongoing projects, and current campaigns with Joyce","o":"Joyce"},{"t":"Review ABM strategy — approach, HubSpot board, and sales alignment","o":"Joyce"},{"t":"Review all active partnerships and their strategic value","o":"Joyce"}]},{"label":"30-day check-in","items":[{"t":"Formal 30-day manager review — assess setup completion, early impressions, align on 60-day goals","o":"Manager","n":true}]}]},{"id":"p60","badge":"31–60 days","bc":"b60","name":"Contribution + focusing on consistency","goal":"Move from learning to execution across marketing channels and functions.","open":false,"sections":[{"label":"Product fluency","items":[{"t":"Learn flexible packaging — specs, use cases, key customers","o":"Product"},{"t":"Learn rigid packaging line","o":"Product"},{"t":"Learn Calyx Cure: stand up vs. side gusset distinctions","o":"Product"},{"t":"Learn labeling products and processes","o":"Product"},{"t":"Manager sign-off on product fluency (or brief knowledge check)","o":"Manager","n":true}]},{"label":"Marketing integration","items":[{"t":"Shadow the relevant owner before contributing to each bucket","o":"Manager","n":true},{"t":"Begin contributing to sample kits process revamp","o":"Joyce"},{"t":"Begin contributing to tradeshow preparation and execution","o":"Joyce"},{"t":"Begin contributing to social media management — drafting and scheduling","o":"Joyce"},{"t":"Begin contributing to ABM support","o":"Joyce"},{"t":"Begin contributing to blog & SEO — drafts and briefs","o":"Joyce"},{"t":"Begin contributing to Google Drive organization","o":"Joyce"}]},{"label":"AI integration","items":[{"t":"Understand how the team uses ChatGPT, Claude, and Gemini day-to-day","o":"Xander"},{"t":"Apply AI as a thought partner on at least one active project","o":"Self","n":true},{"t":"Begin integrating AI into daily project work","o":"Self"}]},{"label":"Check-ins","items":[{"t":"45-day informal check-in with manager — alignment and blockers","o":"Manager","n":true},{"t":"60-day formal review — contributions, feedback, and goals for final 30 days","o":"Manager","n":true}]}]},{"id":"p90","badge":"61–90 days","bc":"b90","name":"Ownership + learning to optimize","goal":"Independently own workflows and actively improve marketing processes at Calyx.","open":false,"sections":[{"label":"Ownership","items":[{"t":"Take full ownership of sample kits process revamp","o":"Self"},{"t":"Take full ownership of tradeshow preparation and execution","o":"Self"},{"t":"Take full ownership of social media management","o":"Self"},{"t":"Take full ownership of ABM support","o":"Self"},{"t":"Take full ownership of blog & SEO pipeline","o":"Self"},{"t":"Take full ownership of Google Drive organization","o":"Self"}]},{"label":"Strategic contributions","items":[{"t":"Identify one process improvement in your area and document it with a proposed solution","o":"Self","n":true},{"t":"Share at least one strategic recommendation in a team or 1:1 setting","o":"Self","n":true},{"t":"Document your ownership areas for future onboarding reference","o":"Self","n":true}]},{"label":"Initial project prep","items":[{"t":"Review production field guide scope with manager before day 90","o":"Manager","n":true},{"t":"Come to the 90-day review with an initial project plan drafted","o":"Self","n":true}]},{"label":"90-day check-in","items":[{"t":"Formal 90-day manager review — reflect on all three phases, align on initial project, set 6-month goals","o":"Manager","n":true}]}]},{"id":"pinit","badge":"Post-90 days","bc":"binit","name":"Initial project — Production field guide","goal":"Demonstrate learning style, project management, and end-to-end execution ability.","open":false,"sections":[{"label":"Production field guide","items":[{"t":"Define scope and objectives for the production field guide","o":"Self"},{"t":"Draft outline and get manager sign-off","o":"Manager"},{"t":"Execute and produce first version of the field guide","o":"Self"},{"t":"Present completed field guide to team","o":"Self"}]}]}];
 
-const NEW = '<span class="new-tag">new</span>';
 const STORE_KEY = 'calyx_' + ROLE_KEY;
 let checks = {};
 try { checks = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e){}
@@ -129,11 +128,16 @@ function resetAll() {
   checks = {}; save(); render();
 }
 function toggle(id) {
-  checks[id] = !checks[id]; save();
+  if (checks[id]) { delete checks[id]; } else {
+    checks[id] = new Date().toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+  }
+  save();
   const el = document.querySelector('.item[data-id="' + id + '"]');
   if (!el) return;
-  el.querySelector('.cb').classList.toggle('on', checks[id]);
-  el.querySelector('.item-text').classList.toggle('done', checks[id]);
+  const isDone = !!checks[id];
+  el.querySelector('.cb').classList.toggle('on', isDone);
+  el.querySelector('.item-text').classList.toggle('done', isDone);
+  el.querySelector('.item-date').textContent = checks[id] || '';
   updateProgress();
 }
 function togglePhase(id) {
@@ -180,7 +184,8 @@ function render() {
         el.className = 'item'; el.dataset.id = id;
         el.onclick = () => toggle(id);
         el.innerHTML = '<div class="cb ' + (checks[id]?'on':'') + '"><div class="ck"></div></div>' +
-          '<span class="item-text ' + (checks[id]?'done':'') + '">' + item.t + (item.n ? NEW : '') + '</span>' +
+          '<span class="item-text ' + (checks[id]?'done':'') + '">' + item.t + '</span>' +
+          '<span class="item-date">' + (typeof checks[id] === 'string' ? checks[id] : '') + '</span>' +
           '<span class="item-owner">' + item.o + '</span>';
         sd.appendChild(el);
       });
