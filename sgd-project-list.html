@@ -74,6 +74,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
 .status-initial { background: #EEEDFE; color: #534AB7; }
 @media (prefers-color-scheme: dark) { .status-initial { background: #26215C; color: #AFA9EC; } }
 
+.sub-items.hidden { display: none; }
+.sub-toggle { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; background: none; border: none; cursor: pointer; color: var(--text3); font-size: 10px; border-radius: 4px; transition: transform 0.2s, background 0.15s; flex-shrink: 0; padding: 0; font-family: inherit; }
+.sub-toggle:hover { background: var(--bg2); color: var(--text); }
+.sub-toggle:not(.open) { transform: rotate(-90deg); }
 .home-btn { margin-left: auto; font-size: 12px; color: var(--text3); text-decoration: none; padding: 6px 12px; border-radius: 8px; border: 0.5px solid var(--border2); transition: all 0.15s; white-space: nowrap; }
 .home-btn:hover { color: var(--text); border-color: var(--text3); background: var(--bg2); }
 .footer { text-align: center; padding: 2rem 0 1rem; font-size: 12px; color: var(--text3); }
@@ -150,6 +154,15 @@ function toggleCat(id) {
   chev.classList.toggle('open', isHidden);
 }
 
+function toggleSub(id) {
+  var wrap = document.getElementById('sub-' + id);
+  var btn = document.getElementById('stoggle-' + id);
+  if (!wrap) return;
+  var isHidden = wrap.classList.contains('hidden');
+  wrap.classList.toggle('hidden', !isHidden);
+  btn.classList.toggle('open', isHidden);
+}
+
 function updateProgress() {
   let total = 0, done = 0;
   document.querySelectorAll('[data-id]').forEach(el => {
@@ -164,6 +177,9 @@ function updateProgress() {
     cat.items.forEach(item => {
       ct++;
       if (checks[item.id]) cd++;
+      if (item.sub) {
+        item.sub.forEach(sub => { ct++; if (checks[sub.id]) cd++; });
+      }
     });
     const lbl = document.getElementById('cnt-' + cat.id);
     if (lbl) lbl.textContent = cd + '/' + ct;
@@ -182,17 +198,6 @@ const categories = [
     ]
   },
   {
-    id: 'growworld',
-    name: 'Grow World Enrichment',
-    note: 'Create Calyx × Grow World branded content for Trial participants — welcoming them to the Trials and providing general Calyx education alongside product-specific education relevant to their Trial.',
-    open: true,
-    items: [
-      { id: 'gw-welcome', t: 'Welcome kit — participant welcome assets', note: null },
-      { id: 'gw-calyx-edu', t: 'General Calyx education content', note: null },
-      { id: 'gw-product-edu', t: 'Trial-specific product education content', note: null }
-    ]
-  },
-  {
     id: 'tradeshow',
     name: 'Trade Show',
     note: null,
@@ -203,17 +208,23 @@ const categories = [
     ]
   },
   {
-    id: 'sales',
-    name: 'Sales Enablement',
-    note: 'Initial Project — see SGD initial project page for full scope and milestones.',
+    id: 'partnership',
+    name: 'Partnership Programs',
+    note: null,
     open: true,
-    badge: 'Initial Project',
     items: [
-      { id: 'se-deck', t: 'Master sales presentation', note: null },
-      { id: 'se-onepagers', t: 'Product one-pagers — Flexible Packaging, Rigid, Labels, Calyx Cure', note: null },
-      { id: 'se-onesheeters', t: 'Product one-sheeters', note: null },
-      { id: 'se-history', t: 'History of Calyx', note: null },
-      { id: 'se-nurture', t: 'Nurture email campaigns (built in HubSpot)', note: null }
+      {
+        id: 'pp-growworld',
+        t: 'Grow World',
+        note: 'Create enrichment and marketing assets for Trial participants — Calyx × Grow World branded content that welcomes participants to the Trials, delivers general Calyx education, and provides product-specific education relevant to each Trial.',
+        sub: [
+          { id: 'pp-gw-welcome', t: 'Welcome kit — participant welcome assets' },
+          { id: 'pp-gw-calyx-edu', t: 'General Calyx education content' },
+          { id: 'pp-gw-product-edu', t: 'Trial-specific product education content' }
+        ]
+      },
+      { id: 'pp-affiliate', t: 'Calyx Cure Ecommerce Affiliate Program', note: null },
+      { id: 'pp-creator', t: 'Calyx Cure Creator Program', note: null }
     ]
   },
   {
@@ -236,6 +247,20 @@ const categories = [
       { id: 'misc-drive', t: 'Revising Google Drive structure', note: null },
       { id: 'misc-naming', t: 'Creating file naming conventions', note: null },
       { id: 'misc-workflow', t: 'Building artwork sharing workflow', note: null }
+    ]
+  },
+  {
+    id: 'sales',
+    name: 'Sales Enablement',
+    note: 'Initial Project — see SGD initial project page for full scope and milestones.',
+    open: false,
+    badge: 'Initial Project',
+    items: [
+      { id: 'se-deck', t: 'Master sales presentation', note: null },
+      { id: 'se-onepagers', t: 'Product one-pagers — Flexible Packaging, Rigid, Labels, Calyx Cure', note: null },
+      { id: 'se-onesheeters', t: 'Product one-sheeters', note: null },
+      { id: 'se-history', t: 'History of Calyx', note: null },
+      { id: 'se-nurture', t: 'Nurture email campaigns (built in HubSpot)', note: null }
     ]
   }
 ];
@@ -276,8 +301,27 @@ function render() {
           '<div class="item-text ' + (isDone ? 'done' : '') + '">' + item.t + '</div>' +
           (item.note ? '<div class="item-note">' + item.note + '</div>' : '') +
         '</div>' +
-        '<span class="item-date">' + (typeof checks[item.id] === 'string' ? checks[item.id] : '') + '</span>';
+        '<span class="item-date">' + (typeof checks[item.id] === 'string' ? checks[item.id] : '') + '</span>' +
+        (item.sub ? '<button class="sub-toggle open" id="stoggle-' + item.id + '" onclick="event.stopPropagation();toggleSub(\'' + item.id + '\')">▼</button>' : '');
       body.appendChild(el);
+      if (item.sub) {
+        const subWrap = document.createElement('div');
+        subWrap.className = 'sub-items';
+        subWrap.id = 'sub-' + item.id;
+        item.sub.forEach(sub => {
+          const isSubDone = !!checks[sub.id];
+          const subEl = document.createElement('div');
+          subEl.className = 'item sub-item';
+          subEl.dataset.id = sub.id;
+          subEl.onclick = e => { e.stopPropagation(); toggle(sub.id); };
+          subEl.innerHTML =
+            '<div class="cb ' + (isSubDone ? 'on' : '') + '"><div class="ck"></div></div>' +
+            '<div class="item-content"><div class="item-text ' + (isSubDone ? 'done' : '') + '">' + sub.t + '</div></div>' +
+            '<span class="item-date">' + (typeof checks[sub.id] === 'string' ? checks[sub.id] : '') + '</span>';
+          subWrap.appendChild(subEl);
+        });
+        body.appendChild(subWrap);
+      }
     });
 
     card.appendChild(body);
