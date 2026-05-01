@@ -76,8 +76,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
 .sub-toggle { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; background: none; border: none; cursor: pointer; color: var(--text3); font-size: 10px; border-radius: 4px; transition: transform 0.2s, background 0.15s; flex-shrink: 0; padding: 0; font-family: inherit; }
 .sub-toggle:hover { background: var(--bg2); color: var(--text); }
 .sub-toggle:not(.open) { transform: rotate(-90deg); }
-.sub-link { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; color: var(--text3); font-size: 12px; text-decoration: none; border-radius: 4px; flex-shrink: 0; transition: background 0.15s, color 0.15s; }
-.sub-link:hover { background: var(--bg2); color: var(--text); }
+.item-note { font-size: 12px; color: var(--text3); margin-top: 3px; line-height: 1.45; }
+.note-link { color: var(--accent); text-decoration: none; font-weight: 600; }
+.note-link:hover { text-decoration: underline; }
 @media (max-width: 480px) { .sub-item { padding-left: 28px; } }
 .footer { text-align: center; padding: 2rem 0 1rem; font-size: 12px; color: var(--text3); }
 .home-btn { margin-left: auto; font-size: 12px; color: var(--text3); text-decoration: none; padding: 6px 12px; border-radius: 8px; border: 0.5px solid var(--border2); transition: all 0.15s; white-space: nowrap; }
@@ -204,9 +205,11 @@ function render() {
             subEl.className = 'item sub-item'; subEl.dataset.id = subId;
             subEl.onclick = function(e) { e.stopPropagation(); toggle(subId); };
             subEl.innerHTML = '<div class="cb ' + (checks[subId]?'on':'') + '"><div class="ck"></div></div>' +
-              '<span class="item-text ' + (checks[subId]?'done':'') + '">' + sub.t + '</span>' +
-              '<span class="item-date">' + (typeof checks[subId] === 'string' ? checks[subId] : '') + '</span>' +
-              (sub.url ? '<a class="sub-link" href="' + sub.url + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">↗</a>' : '');
+              '<div style="flex:1;min-width:0">' +
+                '<span class="item-text ' + (checks[subId]?'done':'') + '">' + sub.t + '</span>' +
+                (sub.url ? '<div class="item-note"><a class="note-link" href="' + sub.url + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">Open ↗</a></div>' : '') +
+              '</div>' +
+              '<span class="item-date">' + (typeof checks[subId] === 'string' ? checks[subId] : '') + '</span>';
             subWrap.appendChild(subEl);
           });
           sd.appendChild(subWrap);
