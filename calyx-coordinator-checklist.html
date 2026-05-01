@@ -24,10 +24,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
 .container { max-width: 720px; margin: 0 auto; }
 .page-header { background: var(--bg); border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem; border: 0.5px solid var(--border); }
 .logo-row { display: flex; align-items: center; gap: 12px; margin-bottom: 1.25rem; }
-.logo-mark { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.logo-mark svg { width: 22px; height: 22px; fill: #fff; }
-.logo-text { font-size: 15px; font-weight: 600; color: var(--text); }
-.logo-sub { font-size: 12px; color: var(--text3); margin-top: 1px; }
+.page-logo { height: 36px; width: auto; display: block; }
 .role-pill { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 12px; border-radius: 99px; margin-bottom: 10px; }
 .page-header h1 { font-size: 24px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
 .page-header p { font-size: 14px; color: var(--text2); line-height: 1.6; margin-bottom: 1.25rem; }
@@ -97,15 +94,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
 <div class="container">
   <div class="page-header">
     <div class="logo-row">
-      <div class="logo-mark">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 2C8.13 2 5 5.13 5 9c0 3.54 2.61 6.47 6 6.93V20h2v-4.07c3.39-.46 6-3.39 6-6.93 0-3.87-3.13-7-7-7zm0 12c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
-        </svg>
-      </div>
-      <div>
-        <div class="logo-text">Calyx</div>
-        <div class="logo-sub">Marketing Team</div>
-      </div>
+      <img src="calyx-logo.png" alt="Calyx Containers" class="page-logo" />
       <a class="home-btn" href="index.html">&#8592; Home</a>
     </div>
     <div class="role-pill">Marketing Coordinator</div>
