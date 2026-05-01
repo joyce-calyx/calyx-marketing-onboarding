@@ -23,66 +23,133 @@
       --purple-light: #26215C; --purple-dark: #AFA9EC;
     }
   }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: var(--bg3); color: var(--text); min-height: 100vh; padding: 2.5rem 1rem; }
-  .container { max-width: 760px; margin: 0 auto; }
-  .site-header { text-align: center; margin-bottom: 2.5rem; }
-  .logo-wrap { display: block; margin-bottom: 1.5rem; }
-  .calyx-logo { height: 64px; width: auto; display: inline-block; }
-  .site-header h1 { font-size: 28px; font-weight: 600; color: var(--text); margin-bottom: 8px; letter-spacing: -0.02em; }
-  .site-header p { font-size: 15px; color: var(--text2); line-height: 1.6; max-width: 480px; margin: 0 auto; }
+  .container { max-width: 760px; margin: 0 auto; animation: fadeInUp 0.4s ease both; }
+
+  /* ── Hero ── */
+  .hero { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 2.5rem 2rem 2rem; margin-bottom: 1.5rem; text-align: center; }
+  .logo-wrap { margin-bottom: 1.75rem; }
+  .calyx-logo { height: 56px; width: auto; display: inline-block; }
+  .role-label { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 14px; border-radius: 99px; margin-bottom: 14px; transition: background 0.25s, color 0.25s; }
+  .role-label-coord  { background: var(--teal-light);   color: var(--teal-dark); }
+  .role-label-design { background: var(--purple-light); color: var(--purple-dark); }
+  .hero h1 { font-size: 30px; font-weight: 700; color: var(--text); margin-bottom: 10px; letter-spacing: -0.025em; line-height: 1.2; }
+  .hero-copy { font-size: 14px; color: var(--text2); line-height: 1.65; max-width: 440px; margin: 0 auto; }
+
+  /* ── Journey strip ── */
+  .journey { display: flex; align-items: flex-start; justify-content: center; margin: 2rem auto 0; max-width: 500px; }
+  .journey-step { display: flex; flex-direction: column; align-items: center; gap: 7px; }
+  .journey-node { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+  .jn-30   { background: #E1F5EE; color: #0F6E56; }
+  .jn-60   { background: #E6F1FB; color: #185FA5; }
+  .jn-90   { background: #EEEDFE; color: #534AB7; }
+  .jn-post { background: #FAEEDA; color: #854F0B; }
+  @media (prefers-color-scheme: dark) {
+    .jn-30   { background: #083d2c; color: #5DCAA5; }
+    .jn-60   { background: #042c53; color: #85B7EB; }
+    .jn-90   { background: #26215C; color: #AFA9EC; }
+    .jn-post { background: #412402; color: #EF9F27; }
+  }
+  .journey-label { font-size: 12px; font-weight: 600; color: var(--text); }
+  .journey-sub   { font-size: 10px; color: var(--text3); }
+  .journey-line  { flex: 1; height: 1.5px; background: var(--border2); margin-top: 20px; min-width: 14px; }
+
+  /* ── Tab bar ── */
   .tab-bar { display: flex; gap: 6px; background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 5px; margin-bottom: 1.5rem; }
   .tab-btn { flex: 1; padding: 10px 16px; border-radius: 8px; border: none; background: transparent; font-family: inherit; font-size: 14px; font-weight: 500; color: var(--text2); cursor: pointer; transition: all 0.18s; display: flex; align-items: center; justify-content: center; gap: 8px; }
   .tab-btn:hover { background: var(--bg2); color: var(--text); }
-  .tab-btn.active-coord { background: var(--teal-light); color: var(--teal-dark); }
+  .tab-btn.active-coord  { background: var(--teal-light);   color: var(--teal-dark); }
   .tab-btn.active-design { background: var(--purple-light); color: var(--purple-dark); }
   .tab-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-  .dot-coord { background: var(--teal); }
+  .dot-coord  { background: var(--teal); }
   .dot-design { background: var(--purple); }
   .tab-panel { display: none; }
-  .tab-panel.active { display: block; }
-  .role-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.25rem; display: flex; align-items: flex-start; gap: 16px; }
-  .role-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .role-icon svg { width: 22px; height: 22px; }
-  .role-icon-coord { background: var(--teal-light); }
-  .role-icon-coord svg { fill: var(--teal-dark); }
-  .role-icon-design { background: var(--purple-light); }
-  .role-icon-design svg { fill: var(--purple-dark); }
-  .role-info h2 { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
-  .role-info p { font-size: 13px; color: var(--text2); line-height: 1.5; }
-  .items-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
-  .item-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-  .item-card-header { padding: 14px 16px; display: flex; align-items: center; gap: 12px; }
-  .item-number { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
-  .num-coord { background: var(--teal-light); color: var(--teal-dark); }
-  .num-design { background: var(--purple-light); color: var(--purple-dark); }
-  .item-card-title { font-size: 14px; font-weight: 500; color: var(--text); }
-  .item-card-subtitle { font-size: 12px; color: var(--text3); margin-top: 2px; }
-  .item-link { text-decoration: none; display: block; }
-  .item-link:hover .item-card { background: var(--bg2); }
-  .arrow-icon { width: 28px; height: 28px; border-radius: 8px; border: 0.5px solid var(--border2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--text3); font-size: 14px; transition: all 0.15s; }
-  .item-inactive .item-card-title { color: var(--text2); }
-  .coming-badge { font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 99px; background: var(--bg3); color: var(--text3); border: 0.5px solid var(--border2); white-space: nowrap; }
-  .section-divider { display: flex; align-items: center; gap: 10px; margin: 1.5rem 0 0.75rem; }
+  .tab-panel.active { display: block; animation: fadeInUp 0.22s ease both; }
+
+  /* ── Section divider ── */
+  .section-divider { display: flex; align-items: center; gap: 10px; margin-bottom: 0.75rem; }
   .section-divider span { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text3); white-space: nowrap; }
   .section-divider hr { flex: 1; border: none; border-top: 0.5px solid var(--border); }
+
+  /* ── Resource cards ── */
+  .items-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .item-link { text-decoration: none; display: block; }
+  .item-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: background 0.15s, box-shadow 0.15s; }
+  .item-link:hover .item-card { background: var(--bg2); box-shadow: 0 2px 14px rgba(0,0,0,0.07); }
+  .item-link:hover .arrow-icon { border-color: var(--text3); color: var(--text); }
+  .item-card-header { padding: 16px; display: flex; align-items: center; gap: 14px; }
+  .item-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .item-icon svg { width: 22px; height: 22px; }
+  .icon-coord  { background: var(--teal-light); }
+  .icon-coord svg  { fill: var(--teal-dark); }
+  .icon-design { background: var(--purple-light); }
+  .icon-design svg { fill: var(--purple-dark); }
+  .item-text-wrap { flex: 1; min-width: 0; }
+  .item-card-top { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
+  .item-card-title { font-size: 14px; font-weight: 600; color: var(--text); }
+  .item-card-desc  { font-size: 12px; color: var(--text3); line-height: 1.5; }
+  .start-badge { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 99px; white-space: nowrap; flex-shrink: 0; }
+  .start-coord  { background: var(--teal-light);   color: var(--teal-dark); }
+  .start-design { background: var(--purple-light); color: var(--purple-dark); }
+  .arrow-icon { width: 28px; height: 28px; border-radius: 8px; border: 0.5px solid var(--border2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--text3); font-size: 14px; transition: all 0.15s; }
+
   .site-footer { text-align: center; margin-top: 2.5rem; font-size: 12px; color: var(--text3); }
+
   @media (max-width: 480px) {
-    body { padding: 1.5rem 0.75rem; }
-    .site-header h1 { font-size: 22px; }
+    body { padding: 1.25rem 0.75rem; }
+    .hero { padding: 1.75rem 1.25rem 1.5rem; }
+    .hero h1 { font-size: 24px; }
     .tab-btn { font-size: 13px; padding: 9px 10px; }
+    .journey-label { font-size: 11px; }
+    .journey-sub { display: none; }
   }
 </style>
 </head>
 <body>
 <div class="container">
-  <div class="site-header">
+
+  <!-- Hero -->
+  <div class="hero">
     <div class="logo-wrap">
       <img src="calyx-logo.png" alt="Calyx Containers" class="calyx-logo" />
     </div>
-    <h1>Marketing onboarding</h1>
-    <p>Welcome to Calyx. Select your role below to access your onboarding plan, checklist, and initial project.</p>
+    <div class="role-label role-label-coord" id="role-label">Marketing Coordinator</div>
+    <h1>We're glad you're here.</h1>
+    <p class="hero-copy" id="hero-copy">You're joining the Calyx marketing team as our new Marketing Coordinator. Everything you need for your first 90 days is right here — start with your onboarding plan.</p>
+    <div class="journey">
+      <div class="journey-step">
+        <div class="journey-node jn-30">30</div>
+        <div class="journey-label">Orientation</div>
+        <div class="journey-sub">Days 1–30</div>
+      </div>
+      <div class="journey-line"></div>
+      <div class="journey-step">
+        <div class="journey-node jn-60">60</div>
+        <div class="journey-label">Contribution</div>
+        <div class="journey-sub">Days 31–60</div>
+      </div>
+      <div class="journey-line"></div>
+      <div class="journey-step">
+        <div class="journey-node jn-90">90</div>
+        <div class="journey-label">Ownership</div>
+        <div class="journey-sub">Days 61–90</div>
+      </div>
+      <div class="journey-line"></div>
+      <div class="journey-step">
+        <div class="journey-node jn-post">+</div>
+        <div class="journey-label">Initial Project</div>
+        <div class="journey-sub">Post-90</div>
+      </div>
+    </div>
   </div>
 
+  <!-- Tab bar -->
   <div class="tab-bar" role="tablist">
     <button class="tab-btn active-coord" role="tab" onclick="switchTab('coord', this)">
       <span class="tab-dot dot-coord"></span>
@@ -96,26 +163,21 @@
 
   <!-- COORDINATOR -->
   <div class="tab-panel active" id="panel-coord">
-    <div class="role-card">
-      <div class="role-icon role-icon-coord">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
-      </div>
-      <div class="role-info">
-        <h2>Marketing coordinator</h2>
-        <p>Your onboarding runs across 30, 60, and 90 days — from orientation and building a foundation, to contribution, and finally full ownership of your core workflows.</p>
-      </div>
-    </div>
-    <div class="section-divider"><span>Resources</span><hr></div>
+    <div class="section-divider"><span>Your resources</span><hr></div>
     <div class="items-grid">
 
-      <!-- MC ONBOARDING PLAN — ACTIVE -->
       <a class="item-link" href="mc-onboarding-plan.html">
         <div class="item-card">
           <div class="item-card-header">
-            <div class="item-number num-coord">1</div>
-            <div style="flex:1">
-              <div class="item-card-title">MC onboarding plan</div>
-              <div class="item-card-subtitle">30 / 60 / 90 day written plan</div>
+            <div class="item-icon icon-coord">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            </div>
+            <div class="item-text-wrap">
+              <div class="item-card-top">
+                <div class="item-card-title">MC onboarding plan</div>
+                <span class="start-badge start-coord">Start here</span>
+              </div>
+              <div class="item-card-desc">Your written roadmap for the first 90 days. Read this before anything else.</div>
             </div>
             <div class="arrow-icon">&#8594;</div>
           </div>
@@ -125,10 +187,14 @@
       <a class="item-link" href="calyx-coordinator-checklist.html">
         <div class="item-card">
           <div class="item-card-header">
-            <div class="item-number num-coord">2</div>
-            <div style="flex:1">
-              <div class="item-card-title">MC onboarding checklist</div>
-              <div class="item-card-subtitle">Interactive 30 / 60 / 90 day checklist</div>
+            <div class="item-icon icon-coord">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            </div>
+            <div class="item-text-wrap">
+              <div class="item-card-top">
+                <div class="item-card-title">MC onboarding checklist</div>
+              </div>
+              <div class="item-card-desc">Your day-to-day guide. Check off tasks as you complete them — progress saves automatically.</div>
             </div>
             <div class="arrow-icon">&#8594;</div>
           </div>
@@ -138,10 +204,14 @@
       <a class="item-link" href="mc-initial-project.html">
         <div class="item-card">
           <div class="item-card-header">
-            <div class="item-number num-coord">3</div>
-            <div style="flex:1">
-              <div class="item-card-title">MC initial project</div>
-              <div class="item-card-subtitle">Production field guide</div>
+            <div class="item-icon icon-coord">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            </div>
+            <div class="item-text-wrap">
+              <div class="item-card-top">
+                <div class="item-card-title">MC initial project</div>
+              </div>
+              <div class="item-card-desc">Your post-90 day project: build and own the production field guide.</div>
             </div>
             <div class="arrow-icon">&#8594;</div>
           </div>
@@ -153,25 +223,21 @@
 
   <!-- DESIGNER -->
   <div class="tab-panel" id="panel-design">
-    <div class="role-card">
-      <div class="role-icon role-icon-design">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
-      </div>
-      <div class="role-info">
-        <h2>Senior graphic designer</h2>
-        <p>Your onboarding runs across 30, 60, and 90 days — from orientation and building a visual foundation, to design contribution, and finally full ownership of Calyx's design workflows.</p>
-      </div>
-    </div>
-    <div class="section-divider"><span>Resources</span><hr></div>
+    <div class="section-divider"><span>Your resources</span><hr></div>
     <div class="items-grid">
 
       <a class="item-link" href="sgd-onboarding-plan.html">
         <div class="item-card">
           <div class="item-card-header">
-            <div class="item-number num-design">1</div>
-            <div style="flex:1">
-              <div class="item-card-title">SGD onboarding plan</div>
-              <div class="item-card-subtitle">30 / 60 / 90 day written plan</div>
+            <div class="item-icon icon-design">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            </div>
+            <div class="item-text-wrap">
+              <div class="item-card-top">
+                <div class="item-card-title">SGD onboarding plan</div>
+                <span class="start-badge start-design">Start here</span>
+              </div>
+              <div class="item-card-desc">Your written roadmap for the first 90 days. Read this before anything else.</div>
             </div>
             <div class="arrow-icon">&#8594;</div>
           </div>
@@ -181,10 +247,14 @@
       <a class="item-link" href="calyx-designer-checklist.html">
         <div class="item-card">
           <div class="item-card-header">
-            <div class="item-number num-design">2</div>
-            <div style="flex:1">
-              <div class="item-card-title">SGD onboarding checklist</div>
-              <div class="item-card-subtitle">Interactive 30 / 60 / 90 day checklist</div>
+            <div class="item-icon icon-design">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            </div>
+            <div class="item-text-wrap">
+              <div class="item-card-top">
+                <div class="item-card-title">SGD onboarding checklist</div>
+              </div>
+              <div class="item-card-desc">Your day-to-day guide. Check off tasks as you complete them — progress saves automatically.</div>
             </div>
             <div class="arrow-icon">&#8594;</div>
           </div>
@@ -194,10 +264,14 @@
       <a class="item-link" href="sgd-project-list.html">
         <div class="item-card">
           <div class="item-card-header">
-            <div class="item-number num-design">3</div>
-            <div style="flex:1">
-              <div class="item-card-title">SGD project list</div>
-              <div class="item-card-subtitle">Living list of design projects</div>
+            <div class="item-icon icon-design">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+            </div>
+            <div class="item-text-wrap">
+              <div class="item-card-top">
+                <div class="item-card-title">SGD project list</div>
+              </div>
+              <div class="item-card-desc">Your living design project backlog. A running list of all active and upcoming work.</div>
             </div>
             <div class="arrow-icon">&#8594;</div>
           </div>
@@ -207,10 +281,14 @@
       <a class="item-link" href="sgd-initial-project.html">
         <div class="item-card">
           <div class="item-card-header">
-            <div class="item-number num-design">4</div>
-            <div style="flex:1">
-              <div class="item-card-title">SGD initial project</div>
-              <div class="item-card-subtitle">Baseline sales enablement kit</div>
+            <div class="item-icon icon-design">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            </div>
+            <div class="item-text-wrap">
+              <div class="item-card-top">
+                <div class="item-card-title">SGD initial project</div>
+              </div>
+              <div class="item-card-desc">Your post-90 day project: build the baseline sales enablement kit.</div>
             </div>
             <div class="arrow-icon">&#8594;</div>
           </div>
@@ -223,11 +301,23 @@
   <div class="site-footer">Calyx Marketing &middot; Onboarding Hub &middot; 2026</div>
 </div>
 <script>
+const heroCopy = {
+  coord:  "You're joining the Calyx marketing team as our new Marketing Coordinator. Everything you need for your first 90 days is right here — start with your onboarding plan.",
+  design: "You're joining the Calyx marketing team as our new Senior Graphic Designer. Everything you need for your first 90 days is right here — start with your onboarding plan."
+};
+const roleLabels = {
+  coord:  { text: 'Marketing Coordinator',  cls: 'role-label-coord' },
+  design: { text: 'Senior Graphic Designer', cls: 'role-label-design' }
+};
 function switchTab(role, btn) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-coord','active-design'));
   document.getElementById('panel-' + role).classList.add('active');
   btn.classList.add('active-' + role);
+  document.getElementById('hero-copy').textContent = heroCopy[role];
+  const lbl = document.getElementById('role-label');
+  lbl.textContent = roleLabels[role].text;
+  lbl.className = 'role-label ' + roleLabels[role].cls;
 }
 </script>
 </body>
