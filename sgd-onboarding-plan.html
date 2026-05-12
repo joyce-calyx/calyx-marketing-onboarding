@@ -1133,13 +1133,32 @@
       document.querySelectorAll('.phase-panel').forEach((p, i) => p.classList.toggle('active', i === idx));
     }
 
+    const SC_KEY = 'calyx_sgd_scorecard_v1';
+
+    function saveProgress() {
+      const all = document.querySelectorAll('.sc-table input[type="checkbox"]');
+      localStorage.setItem(SC_KEY, JSON.stringify(Array.from(all).map(cb => cb.checked)));
+    }
+
+    function loadProgress() {
+      const saved = localStorage.getItem(SC_KEY);
+      if (!saved) return;
+      const state = JSON.parse(saved);
+      document.querySelectorAll('.sc-table input[type="checkbox"]').forEach((cb, i) => {
+        if (state[i]) cb.checked = true;
+      });
+    }
+
     function updateProgress() {
       const all = document.querySelectorAll('.sc-table input[type="checkbox"]');
       const done = document.querySelectorAll('.sc-table input[type="checkbox"]:checked').length;
       const total = all.length;
       document.getElementById('progress-count').textContent = done + ' / ' + total;
       document.getElementById('progress-fill').style.width = total ? Math.round(done / total * 100) + '%' : '0%';
+      saveProgress();
     }
+
+    document.addEventListener('DOMContentLoaded', function() { loadProgress(); updateProgress(); });
   </script>
 </body>
 </html>
